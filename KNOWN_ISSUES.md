@@ -2,13 +2,22 @@
 
 ## Active issues
 
-- Repository split has been defined conceptually and must now be enforced cleanly in GitHub.
-- Some historical materials came from a flat staging area and may still contain pre-split wording.
-- Runtime-sensitive files exist, but red-zone handling must remain conservative during repo normalization.
-- Documentation drift remains a risk if context and core repos are edited independently without consistency review.
+- Real install/start smoke on the target Raspberry Pi / device has not
+  yet been performed. Only static smoke (`bash -n`, `ast.parse`,
+  `json.load`) has been run inside `wayaura-core`. Owner / device
+  validation is pending.
+- Audio tuning in `wayaura-core` (e.g. `system/asound.conf`, audio
+  detect thresholds, any device-specific overrides) requires
+  owner-and-device-specific decisions and remains a red zone.
+- Documentation drift between `wayaura-context` and `wayaura-core`
+  remains a risk if the two repositories are edited independently
+  without a consistency pass.
 
 ## Ongoing caution points
 
-- Do not treat old session memory as reliable unless reflected in current docs.
-- Do not move runtime files into the context repo.
-- Do not duplicate the full continuity layer into the core repo.
+- Do not treat old session memory as reliable unless reflected in
+  current docs.
+- Do not move runtime files into this context repository.
+- Do not duplicate the full continuity layer into `wayaura-core`.
+- Do not open red zones (audio, wake-word, secrets, device
+  identifiers, local paths) without explicit Owner approval.
