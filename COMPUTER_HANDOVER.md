@@ -11,9 +11,11 @@ Before acting, Computer should read:
 1. `START_HERE.md`
 2. `AGENT_BRIEF.md`
 3. `CURRENT_STATE.md`
-4. `WayAura_ARCHITECTURE.md`
-5. `WayAura_REPOS_STRATEGY.md`
-6. the task-specific instruction from the owner.
+4. `NEXT_WORK.md`
+5. `REPO_MAP.md`
+6. `WayAura_ARCHITECTURE.md`
+7. `WayAura_REPOS_STRATEGY.md`
+8. the task-specific instruction from the owner.
 
 ## Default scope
 

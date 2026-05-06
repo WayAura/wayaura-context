@@ -18,12 +18,16 @@ Runtime code lives in the private repository
    rules, and the red zones.
 2. Read [`CURRENT_STATE.md`](CURRENT_STATE.md) — the project's current phase
    and what is in progress right now.
-3. Identify which role you are filling: Search, Computer, or Owner-directed
+3. Read [`NEXT_WORK.md`](NEXT_WORK.md) — the current practical direction and
+   what the next agent should do first.
+4. Read [`REPO_MAP.md`](REPO_MAP.md) — which repository a given task belongs
+   to.
+5. Identify which role you are filling: Search, Computer, or Owner-directed
    support.
-4. Read the matching handover:
+6. Read the matching handover:
    - Search → [`SEARCH_HANDOVER.md`](SEARCH_HANDOVER.md)
    - Computer → [`COMPUTER_HANDOVER.md`](COMPUTER_HANDOVER.md)
-5. Read [`WayAura_ARCHITECTURE.md`](WayAura_ARCHITECTURE.md) and
+7. Read [`WayAura_ARCHITECTURE.md`](WayAura_ARCHITECTURE.md) and
    [`WayAura_AGENTS.md`](WayAura_AGENTS.md) before proposing changes.
 
 ## Hard rules

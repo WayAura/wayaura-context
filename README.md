@@ -23,14 +23,17 @@ A new agent should read files in this order:
 1. `START_HERE.md`
 2. `AGENT_BRIEF.md`
 3. `CURRENT_STATE.md`
-4. `WayAura_OVERVIEW.md`
-5. `WayAura_OFFICIAL_MAP.md`
-6. `WayAura_ARCHITECTURE.md`
-7. `WayAura_DEV_ONBOARDING.md`
-8. `SEARCH_HANDOVER.md` or `COMPUTER_HANDOVER.md`
-9. `KNOWN_ISSUES.md`
-10. `CHANGELOG.md`
-11. `WayAura_REPOS_STRATEGY.md`
+4. `NEXT_WORK.md`
+5. `REPO_MAP.md`
+6. `WayAura_OVERVIEW.md`
+7. `WayAura_OFFICIAL_MAP.md`
+8. `WayAura_ARCHITECTURE.md`
+9. `WayAura_AGENTS.md`
+10. `WayAura_DEV_ONBOARDING.md`
+11. `SEARCH_HANDOVER.md` or `COMPUTER_HANDOVER.md`
+12. `KNOWN_ISSUES.md`
+13. `CHANGELOG.md`
+14. `WayAura_REPOS_STRATEGY.md`
 
 ## Core Rule
 

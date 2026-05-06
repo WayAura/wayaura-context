@@ -9,6 +9,8 @@ not a description of what Search "feels like"; it is the procedure.
 2. Read, in order:
    - [`AGENT_BRIEF.md`](AGENT_BRIEF.md)
    - [`CURRENT_STATE.md`](CURRENT_STATE.md)
+   - [`NEXT_WORK.md`](NEXT_WORK.md)
+   - [`REPO_MAP.md`](REPO_MAP.md)
    - [`WayAura_ARCHITECTURE.md`](WayAura_ARCHITECTURE.md)
    - [`WayAura_AGENTS.md`](WayAura_AGENTS.md)
    - [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md)

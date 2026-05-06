@@ -8,16 +8,17 @@ human or agent, Search or Computer.
 1. Read [`START_HERE.md`](START_HERE.md).
 2. Read [`AGENT_BRIEF.md`](AGENT_BRIEF.md) and
    [`CURRENT_STATE.md`](CURRENT_STATE.md).
-3. Read [`WayAura_OVERVIEW.md`](WayAura_OVERVIEW.md),
+3. Read [`NEXT_WORK.md`](NEXT_WORK.md) and [`REPO_MAP.md`](REPO_MAP.md).
+4. Read [`WayAura_OVERVIEW.md`](WayAura_OVERVIEW.md),
    [`WayAura_OFFICIAL_MAP.md`](WayAura_OFFICIAL_MAP.md), and
    [`WayAura_ARCHITECTURE.md`](WayAura_ARCHITECTURE.md).
-4. Read [`WayAura_AGENTS.md`](WayAura_AGENTS.md).
-5. Read the handover for your role:
+5. Read [`WayAura_AGENTS.md`](WayAura_AGENTS.md).
+6. Read the handover for your role:
    - Search → [`SEARCH_HANDOVER.md`](SEARCH_HANDOVER.md).
    - Computer → [`COMPUTER_HANDOVER.md`](COMPUTER_HANDOVER.md).
-6. Read [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) and the most recent entries
+7. Read [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) and the most recent entries
    of [`CHANGELOG.md`](CHANGELOG.md).
-7. Only then move to the runtime repository
+8. Only then move to the runtime repository
    [`wayaura-core`](https://github.com/WayAura/wayaura-core), and only
    if your task requires it.
 
@@ -39,14 +40,17 @@ ask the Owner to reconstruct it.
 
 ## Current practical move
 
-The repository split is now physically realized:
+The repository split is physically realized, and `wayaura-core` now
+holds an Aura 0.1 runtime working base:
 
 - This repository, `wayaura-context`, is the continuity layer.
-- `wayaura-core` is the private runtime layer.
+- `wayaura-core` is the private runtime layer with imported Aura 0.1
+  runtime, install/start scripts, and operational docs.
 
-After onboarding, the practical move depends on the Owner's instructions
-and on [`CURRENT_STATE.md`](CURRENT_STATE.md). Do not assume work that
-is not stated there.
+After onboarding, the practical move depends on the Owner's instructions,
+[`CURRENT_STATE.md`](CURRENT_STATE.md), and
+[`NEXT_WORK.md`](NEXT_WORK.md). Do not assume work that is not stated
+there.
 
 ## What to do when you finish a task
 
