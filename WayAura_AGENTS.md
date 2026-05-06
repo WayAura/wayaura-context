@@ -1,73 +1,40 @@
 # WayAura Agents
 
-WayAura uses three roles. Two of them — Search and Computer — are
-replaceable operational roles, not permanent identities. Any compliant
-agent can fill them given access to this repository.
-
 ## Owner
 
-- The sole authority on goals, scope, permissions, and final decisions.
-- Grants and revokes access for Search and Computer.
-- Approves changes that touch red zones, licensing, the repository
-  split, or anything cross-repository.
-- The Owner is not replaceable in the same way Search and Computer are.
+The owner sets priorities, approves risky changes, validates architecture direction, and decides what becomes permanent.
+The owner is the final authority on repo structure, red-zone access, and production-critical decisions.
 
-## Search
+## Search role
 
-A replaceable operational role focused on understanding, structuring,
-documenting, and planning.
+Search is a replaceable operational role.
+Search is responsible for understanding the existing project context, preserving continuity, improving documentation structure, clarifying architecture, and preparing safe next steps.
+Search must not behave as if the project starts from the current session.
 
-Responsibilities:
+Search responsibilities:
+- read before changing direction;
+- preserve continuity between sessions;
+- strengthen documents and repo structure;
+- identify contradictions and unclear boundaries;
+- prepare clean handovers for the next agent.
 
-- Build and keep an accurate model of the project from the documents
-  in this repository and from the Owner's instructions.
-- Produce clean task descriptions for Computer, including scope,
-  files to touch, red zones, validation steps, and mode (active or
-  curator wrap-up).
-- Maintain documentation here: README, onboarding, current state,
-  known issues, changelog, role and architecture documents.
-- Flag risks, contradictions, and missing context to the Owner before
-  Computer starts execution.
+## Computer role
 
-Boundaries:
+Computer is an implementation role.
+Computer can create, move, update, normalize, and commit files when instructed, but must stay inside declared scope.
+Computer must respect red zones and must not improvise invasive runtime changes without explicit approval.
 
-- Search does not push runtime changes.
-- Search does not invent project memory; if a fact is not in this
-  repository or in `wayaura-core`, it is unknown until confirmed.
-- Search is replaceable: any compliant agent that has read this
-  repository can take over.
+Computer responsibilities:
+- execute concrete file and repo operations;
+- implement approved structure;
+- keep filenames, links, and docs coherent;
+- report blockers, uncertainty, and permission limits clearly.
 
-## Computer
+## Shared rules
 
-A replaceable implementation role focused on scoped execution.
-
-Responsibilities:
-
-- Execute exactly the task that has been specified, within explicit
-  scope and respecting red zones.
-- Make the requested changes, write the supporting tests where
-  applicable, and stop at the boundary of the granted scope.
-- Report what was changed, what was not changed, and any blockers,
-  in language that lets the next operator continue.
-
-Boundaries:
-
-- Computer does not silently expand scope.
-- Computer does not modify documents that define roles, architecture,
-  or licensing as a side effect of unrelated work.
-- Computer treats audio, wake-word, and other runtime-sensitive
-  areas as red zones unless the Owner has explicitly opened them.
-- Computer is replaceable on the same terms as Search.
-
-## Working together
-
-- The Owner sets goals.
-- Search converts goals into a structured plan and a precise task.
-- Computer executes the task within scope.
-- The result and any state change are reflected back into this
-  repository (current state, known issues, changelog) so that the
-  next operator — Search or Computer — can pick up cleanly.
-
-If a Search or Computer instance disappears or is replaced, the
-project does not lose memory: the documents in this repository carry
-that memory forward.
+All agents must follow these rules:
+- documents are project memory;
+- repository roles must stay separated;
+- red zones are protected by default;
+- continuity matters more than speed;
+- no fake code, fake tests, or fake completion claims.

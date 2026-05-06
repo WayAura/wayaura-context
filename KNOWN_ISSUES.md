@@ -1,17 +1,14 @@
-# KNOWN_ISSUES
+# Known Issues
 
-This file lists real, currently open issues for `wayaura-context`. It is
-not a brainstorm, a wishlist, or a backlog of future ideas. If an item
-does not block or risk current work, it does not belong here.
+## Active issues
 
-## Open
+- Repository split has been defined conceptually and must now be enforced cleanly in GitHub.
+- Some historical materials came from a flat staging area and may still contain pre-split wording.
+- Runtime-sensitive files exist, but red-zone handling must remain conservative during repo normalization.
+- Documentation drift remains a risk if context and core repos are edited independently without consistency review.
 
-- None at the time of repository initialization.
+## Ongoing caution points
 
-## Notes
-
-- Runtime, install/start, and configuration issues belong in
-  `wayaura-core`, not here. This file tracks only issues that affect
-  the documentation and continuity layer.
-- When an issue is resolved, remove it from this list and record the
-  resolution in [`CHANGELOG.md`](CHANGELOG.md).
+- Do not treat old session memory as reliable unless reflected in current docs.
+- Do not move runtime files into the context repo.
+- Do not duplicate the full continuity layer into the core repo.
