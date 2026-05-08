@@ -8,6 +8,23 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 ### Added
+- `KNOWN_ISSUES.md` — recorded the single-USB audio incident as an
+  active issue: with one USB card carrying both microphone and
+  headphones / AUX, Aura starts but neither direction works; adding
+  a second USB adapter restores both. Primary hypothesis: likely a
+  device / ALSA full-duplex limitation of the single USB card
+  rather than an Aura routing-selection bug, pending on-device
+  proof. Also recorded a minor `wayaura-core` doc / comment drift
+  about `PA_ALSA_PLUGHW=1` not actually being exported by
+  `start.sh`, separate from the incident.
+- `NEXT_WORK.md` — added a bounded next-step section describing
+  the on-device simultaneous capture + playback proof that must
+  precede any audio code or config change, with example
+  `arecord` / `aplay` commands framed as a proof plan rather than
+  completed checks.
+- `CURRENT_STATE.md` — added a single concise factual note in the
+  pending-validation section pointing at the single-USB incident
+  in `KNOWN_ISSUES.md` and the bounded next step in `NEXT_WORK.md`.
 - Naming convention recorded in `CURRENT_STATE.md` and
   `NEXT_WORK.md`: the current owner-provided runtime source
   package is referred to as the `aura-0.1` archive (the

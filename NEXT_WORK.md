@@ -36,6 +36,47 @@ without touching anything outside the granted scope, and to keep
    confirm scope with the Owner first; treat audio as red zone by
    default.
 
+## Bounded next step: single-USB audio proof
+
+The current open audio incident (single USB card carrying both
+microphone and headphones / AUX — Aura starts but neither hears nor
+is heard; adding a second USB adapter restores both directions) is
+recorded in [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md). The primary
+hypothesis is that this is likely a device / ALSA full-duplex
+limitation of the single USB card rather than an Aura
+routing-selection bug. This needs on-device proof before any code or
+config change.
+
+The next bounded step is, on the actual target device with only the
+problematic single USB card attached:
+
+1. Identify the USB card index (for example via `arecord -l` and
+   `aplay -l`).
+2. Run a simultaneous capture + playback test on that one card —
+   for example, in two terminals on the device, something like
+   `arecord -D hw:N,0 -f S16_LE -r 16000 -c 1 /tmp/cap.wav` in one
+   and `aplay -D plughw:N,0 /tmp/cap.wav` (or any safe known WAV)
+   in the other, run at the same time. These commands are a
+   proof-plan example, not a completed check.
+3. Record whether full-duplex on the same card actually works
+   outside of Aura, and capture any ALSA / driver errors.
+
+Only after that proof is in:
+
+- If full-duplex on the single card fails outside Aura too, the
+  fix path is hardware (the second USB adapter requirement is
+  documented as a constraint) or, if pursued, a narrow
+  `dmix` + `dsnoop` `/etc/asound.conf` profile scoped to the
+  single-USB case in `wayaura-core`.
+- If full-duplex on the single card works outside Aura, the
+  investigation moves into `wayaura-core` (`start.sh`,
+  `scripts/audio_detect.sh`, `runtime/audio.env` merge order, and
+  any `PA_ALSA_*` assumptions).
+
+Until this proof exists, do not change audio routing code or
+`asound.conf` shape in `wayaura-core`. Audio remains a red zone and
+requires explicit Owner approval.
+
 ## What not to touch without Owner approval
 
 - Audio pipeline, wake-word, and any other runtime-sensitive

@@ -71,6 +71,14 @@ repository:
 - Audio tuning values (`asound.conf`, audio detect thresholds, any
   device-specific overrides). These are red-zone, owner-and-device
   decisions.
+- An open single-USB audio incident is recorded in
+  [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md): one USB card carrying both
+  microphone and headphones / AUX results in no audio in either
+  direction, while a second USB adapter restores both. The primary
+  hypothesis is a likely device / ALSA full-duplex limitation of the
+  single USB card rather than an Aura routing bug, and it requires
+  on-device proof before any code or config change. The bounded
+  next step is described in [`NEXT_WORK.md`](NEXT_WORK.md).
 
 ## What is explicitly out of scope here
 
