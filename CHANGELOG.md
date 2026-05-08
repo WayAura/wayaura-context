@@ -8,6 +8,11 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 ### Added
+- Naming convention recorded in `CURRENT_STATE.md` and
+  `NEXT_WORK.md`: the current owner-provided runtime source
+  package is referred to as the `aura-0.1` archive (the
+  `aura-0.1` runtime package) in reports, handover, and task
+  framing. No new archive names without explicit Owner decision.
 - `NEXT_WORK.md` — compact operational bridge between
   `CURRENT_STATE.md` and the next agent's first practical move.
 - `REPO_MAP.md` — compact navigation between `wayaura-context` and

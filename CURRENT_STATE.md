@@ -39,6 +39,14 @@ truth lives in `wayaura-core`.
   here.
 - Search and Computer are defined as replaceable roles, not
   identities.
+- Naming convention: the current owner-provided runtime source
+  package is referred to as the `aura-0.1` archive (equivalently
+  the `aura-0.1` runtime package). Reports, handover notes, and
+  task framing should use this exact name when pointing at that
+  package. No new archive names are introduced without an
+  explicit Owner decision. This is a naming convention only and
+  does not by itself claim a new product version beyond the
+  current runtime base.
 
 ## What is in progress
 

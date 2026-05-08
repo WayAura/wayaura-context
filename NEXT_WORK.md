@@ -47,3 +47,13 @@ without touching anything outside the granted scope, and to keep
   definitions, handover rules.
 - The Aura 0.1 runtime files in `wayaura-core` beyond the scope of
   the granted task.
+
+## Naming convention for the runtime package
+
+When referring to the current owner-provided runtime source package
+in reports, handover notes, or task framing, use the name
+`aura-0.1` — for example, the `aura-0.1 archive` or the
+`aura-0.1 runtime package`. Do not introduce new archive names
+without an explicit Owner decision. This is a naming convention,
+not an automatic claim that product logic has advanced beyond the
+current runtime base.
