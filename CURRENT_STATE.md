@@ -79,6 +79,16 @@ repository:
   single USB card rather than an Aura routing bug, and it requires
   on-device proof before any code or config change. The bounded
   next step is described in [`NEXT_WORK.md`](NEXT_WORK.md).
+- Phase 1 reliable-autostart and audio-fallback changes have been
+  implemented in `wayaura-core` (`system/aura.service`, `start.sh`,
+  `scripts/audio_detect.sh`, and the associated docs / `.env`
+  template). They have been statically validated in sandbox
+  (`bash -n`, `systemd-analyze verify`, dry run of `audio_detect.sh
+  start` on a host without USB producing a safe degraded
+  `runtime/audio.env`). On-device validation on the target
+  Raspberry Pi is still pending and is the next bounded move; until
+  that validation passes, Phase 1 must not be described as fully
+  solved.
 
 ## What is explicitly out of scope here
 

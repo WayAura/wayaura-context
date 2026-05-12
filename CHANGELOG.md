@@ -8,6 +8,22 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 ### Added
+- `CURRENT_STATE.md`, `NEXT_WORK.md`, `KNOWN_ISSUES.md` — recorded
+  that `wayaura-core` Phase 1 (reliable autostart + audio fallback)
+  has been implemented and statically validated in sandbox, but
+  still requires on-device validation on the target Raspberry Pi
+  before it can be described as solved. Concrete `wayaura-core`
+  commit range `0ef6cab..3be4fbc` (`a967b64`, `76c53db`, `f7e70ec`,
+  `3be4fbc`) covering `system/aura.service`, `start.sh`,
+  `scripts/audio_detect.sh`, and the associated docs is captured in
+  `NEXT_WORK.md`. The bounded next move is on-device validation
+  (cold boot without USB, cold boot with stable USB mic,
+  MicA / AB13X playback-failure case, and confirmation of
+  `PA_ALSA_PLUGHW=1` in effect plus RMS / `MIC_DEBUG` if needed),
+  not more code first. The earlier `PA_ALSA_PLUGHW=1`
+  documentation-drift note in `KNOWN_ISSUES.md` is updated to
+  reflect that `start.sh` now exports it; on-device confirmation
+  remains part of pending Phase 1 validation.
 - `KNOWN_ISSUES.md` — recorded the single-USB audio incident as an
   active issue: with one USB card carrying both microphone and
   headphones / AUX, Aura starts but neither direction works; adding

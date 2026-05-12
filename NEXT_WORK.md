@@ -36,7 +36,74 @@ without touching anything outside the granted scope, and to keep
    confirm scope with the Owner first; treat audio as red zone by
    default.
 
-## Bounded next step: single-USB audio proof
+## Bounded next step: on-device Phase 1 validation
+
+Phase 1 of `wayaura-core` (reliable autostart + audio fallback) is
+implemented in core and statically validated in sandbox. It is not
+yet confirmed on the target device. The next bounded move is
+on-device validation, not more code first.
+
+Commits on `wayaura-core` `main` covering Phase 1 (range
+`0ef6cab..3be4fbc`):
+
+- `a967b64` — `aura.service` waits for udev settle before
+  `start.sh` (`systemd-udev-settle.service` plus
+  `ExecStartPre=udevadm settle --timeout=10`).
+- `76c53db` — `scripts/audio_detect.sh` probes selected playback by
+  a short `aplay` open-probe, records `AURA_PLAYBACK_PROBE`, and
+  falls back to bcm2835 / HDMI on failure.
+- `f7e70ec` — `start.sh` waits up to
+  `AURA_AUDIO_STARTUP_WAIT_SEC` (default 8s) and retries audio
+  detection if the first pass lands on an HDMI fallback while USB
+  is still arriving; exports the chosen profile via
+  `AURA_AUDIO_PROFILE` (`usb_combo`,
+  `dual_mic_mix_usb_playback`, `usb_capture_hdmi_playback`, plus
+  degraded variants) and also exports `PA_ALSA_PLUGHW=1`.
+- `3be4fbc` — docs (`README.md`, `docs/AUDIO.md`, `CONFIG.md`,
+  `.env.config.example`) updated for autostart audio wait, profile
+  enum, and playback probe.
+
+Static validation already performed in `wayaura-core` sandbox:
+
+- `bash -n start.sh` and `bash -n scripts/audio_detect.sh` pass.
+- `systemd-analyze verify system/aura.service` emits only the
+  expected `__WORKDIR__` install-template placeholder warning.
+- `bash scripts/audio_detect.sh start` on a host without USB
+  produces a safe empty / degraded `runtime/audio.env` with
+  `AURA_PLAYBACK_PROBE=unknown`.
+
+What still needs to happen on the actual Raspberry Pi, in this
+order, before Phase 1 is described as solved:
+
+1. Cold boot without USB attached. Expected: the service starts
+   into a predictable degraded / fallback profile with no manual
+   workaround. Capture the chosen `AURA_AUDIO_PROFILE` and any
+   reason logged by `start.sh` / `scripts/audio_detect.sh`.
+2. Cold boot with a stable USB mic adapter attached. Expected: a
+   working `AURA_AUDIO_PROFILE` (e.g. `usb_combo` or
+   `dual_mic_mix_usb_playback` / `usb_capture_hdmi_playback` as
+   appropriate), and logs showing the chosen profile and the
+   reason it was selected after the udev-settle wait.
+3. Reproduce the problematic MicA / AB13X playback-failure case.
+   Expected: `AURA_PLAYBACK_PROBE=fail` is recorded and playback
+   falls back to HDMI where appropriate, without manual editing of
+   `runtime/audio.env`.
+4. Confirm `PA_ALSA_PLUGHW=1` is in effect for the running
+   service, and capture RMS / `MIC_DEBUG` output if mic level is
+   in doubt.
+
+Until these on-device checks are in, do not extend autostart or
+audio-fallback code further in `wayaura-core` and do not claim the
+single-USB or HDMI-fallback symptom is resolved. The previously
+recorded single-USB full-duplex proof step still stands as a
+separate, narrower investigation; see the section below.
+
+`POSTCHANGECHECKLIST.md` does not exist in `wayaura-core` yet, so
+on-device results should be recorded against
+`TESTSCENARIOS.md` and `SECURITY.md` until a dedicated checklist
+file is introduced under a separate task.
+
+## Earlier bounded step: single-USB audio proof
 
 The current open audio incident (single USB card carrying both
 microphone and headphones / AUX — Aura starts but neither hears nor
