@@ -20,6 +20,7 @@ Operational runtime files belong in `wayaura-core`.
 ## Reading Order
 
 A new agent should read files in this order:
+
 1. `START_HERE.md`
 2. `AGENT_BRIEF.md`
 3. `CURRENT_STATE.md`
@@ -34,6 +35,10 @@ A new agent should read files in this order:
 12. `KNOWN_ISSUES.md`
 13. `CHANGELOG.md`
 14. `WayAura_REPOS_STRATEGY.md`
+
+For a compact index of what each document is for, see
+[`DOCINDEX.md`](DOCINDEX.md). It is a navigation aid, not a
+replacement for the reading order above.
 
 ## Core Rule
 

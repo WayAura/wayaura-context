@@ -30,6 +30,10 @@ Runtime code lives in the private repository
 7. Read [`WayAura_ARCHITECTURE.md`](WayAura_ARCHITECTURE.md) and
    [`WayAura_AGENTS.md`](WayAura_AGENTS.md) before proposing changes.
 
+If you need a compact index of what every document in this
+repository is for, see [`DOCINDEX.md`](DOCINDEX.md). It is a
+navigation aid only; this file remains the mandatory entry point.
+
 ## Hard rules
 
 - Do not invent project memory. If a fact is not in these documents or in
