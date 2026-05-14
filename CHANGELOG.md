@@ -7,6 +7,28 @@ to that release and a new Unreleased section is started above it.
 
 ## Unreleased
 
+### Added (Phase 2 — bounded self-healing layer — 2026-05-14)
+
+- `health.py` (`AuraHealthMonitor`) added to `wayaura-core`: state machine
+  HEALTHY → DEGRADED → RECOVERING → FAILED_HARD. Commits `416bb5e`,
+  `248a97e`.
+- Startup audio validation window (15s default, `AURA_SELF_HEAL_STARTUP_WINDOW_SEC`).
+- Runtime audio recovery on playback exception (budget shared with startup,
+  `AURA_SELF_HEAL_MAX_ATTEMPTS=2` default).
+- AB13X / single USB class-based reroute to `builtin_fallback` on recovery
+  (profile string check, no hardcoded device names).
+- `[HEAL]` / `[HEALTH]` / `[RECOVERY]` log prefixes on all health events.
+- `AURA_SELF_HEALING=0` makes all public methods no-ops.
+- Basic systemd restart policy confirmed: `Restart=on-failure`, `RestartSec=5`,
+  `StartLimitBurst=3`, `StartLimitIntervalSec=60` in `system/aura.service`.
+- `docs/SELF_HEALING.md` added to `wayaura-core` with state diagram, recovery
+  order, env flags table, example logs, explicit boundaries, and Phase 2B note.
+- `RELEASE_NOTES.md` Phase 2 section added to `wayaura-core`.
+- `docs/AUDIO.md` links to `docs/SELF_HEALING.md`.
+- `CURRENT_STATE.md`, `KNOWN_ISSUES.md`, `NEXT_WORK.md` updated in
+  `wayaura-context` to reflect Phase 2 completion.
+- Phase 2B (Type=notify watchdog) explicitly deferred and documented.
+
 ### Added (runtime stabilization + context sync — 2026-05-14)
 
 - `CURRENT_STATE.md`, `KNOWN_ISSUES.md`, `NEXT_WORK.md` updated to

@@ -7,23 +7,25 @@ work moves.
 
 ## Current practical direction
 
-The runtime stabilization pass (stop-ack, adaptive audio profiles,
-single-USB routing policy) has been completed and validated on the
-owner's device. `wayaura-core` is in a stable, known-good state at
-commit `070473e`.
+Phase 2 — bounded self-healing layer — has been implemented in
+`wayaura-core` (commits `416bb5e`, `248a97e`). A `AuraHealthMonitor`
+state machine is live; startup and runtime audio recovery is bounded
+by `AURA_SELF_HEAL_MAX_ATTEMPTS`; basic systemd restart policy is in
+place; full documentation is in `docs/SELF_HEALING.md`.
 
-The next work directions are documented as a roadmap (not active tasks)
-in `wayaura-core` `RELEASE_NOTES.md`:
+The next work directions (roadmap, not yet active tasks):
 
-- **Self-healing:** limited auto-checks and auto-fix for typical small
-  failures (audio profile anomalies, stuck services, network).
+- **Phase 2B (deferred):** `Type=notify` systemd watchdog, `WatchdogSec`,
+  `sd_notify` heartbeat from `assistant.py` main loop. Explicitly
+  deferred and documented in `RELEASE_NOTES.md`, `system/aura.service`,
+  and `docs/SELF_HEALING.md`. Owner approval required before opening.
 - **Autostart to ideal:** cold-boot always produces a correct Aura 0.1
   without race conditions or manual workarounds.
 - **Pause/resume and UX polish:** pause/resume for long TTS responses,
   further adaptive improvements, cosmetic tuning.
 
-None of these are scoped as active tasks yet. Owner approval required
-before any of them opens as a task in `wayaura-core`.
+None of these are active tasks. Owner approval required before any of
+them opens as a task in `wayaura-core`.
 
 ## What the next agent should do first
 
@@ -47,18 +49,20 @@ hardware characteristic of the adapter, documented as `known issue /
 not blocking` in `wayaura-core` `RELEASE_NOTES.md` and `docs/AUDIO.md`.
 Reliable workaround: start without USB adapter, plug after greeting.
 
+The self-healing layer (Phase 2) will attempt recovery in this case
+(reroute to `builtin_fallback`), but success depends on hardware state
+at startup.
+
 ## What not to touch without Owner approval
 
-- Audio pipeline, wake-word, and any other runtime-sensitive
-  subject.
-- Real configuration values, secrets, device identifiers, local
-  paths.
+- Audio pipeline, wake-word, and any other runtime-sensitive subject.
+- Real configuration values, secrets, device identifiers, local paths.
 - Licensing and proprietary notices.
-- The cross-repository contract: architecture split, role
-  definitions, handover rules.
+- The cross-repository contract: architecture split, role definitions,
+  handover rules.
 - The Aura 0.1 runtime files in `wayaura-core` beyond the scope of
   the granted task.
 
 For the `aura-0.1` runtime package naming convention, see
-[`CURRENT_STATE.md`](CURRENT_STATE.md). Do not introduce new
-archive names without explicit Owner approval.
+[`CURRENT_STATE.md`](CURRENT_STATE.md). Do not introduce new archive
+names without explicit Owner approval.

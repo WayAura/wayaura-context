@@ -79,6 +79,30 @@ validated on the owner's device. The following are now true:
 - Stage progress documented in `RELEASE_NOTES.md` in `wayaura-core`
   (commit `070473e`), including known limitations and roadmap.
 
+## What is true right now (Phase 2 — bounded self-healing layer)
+
+Phase 2 has been implemented and pushed to `wayaura-core` main.
+The following are now true:
+
+- `health.py` (`AuraHealthMonitor`) is live in `wayaura-core`. State
+  machine: HEALTHY → DEGRADED → RECOVERING → FAILED_HARD.
+- Startup audio validation window (default 15s, `AURA_SELF_HEAL_STARTUP_WINDOW_SEC`).
+  After `_detect_playback()`, the health monitor validates audio env vars
+  and attempts recovery (max 2 attempts by default) before entering DEGRADED.
+- Runtime audio recovery: on playback exception in `_play_wav_file`, the
+  health monitor is invoked. Budget is shared between startup and runtime
+  (single counter, no reset).
+- AB13X / single USB class-based policy: if `AURA_PLAYBACK_PROFILE` is
+  `usb_in_hdmi_out`, recovery reroutes to `builtin_fallback` (class-based
+  string check, no hardcoded device names or paths).
+- Log prefixes `[HEAL]`, `[HEALTH]`, `[RECOVERY]` on all health events.
+- `AURA_SELF_HEALING=0` disables the entire module (no-op mode).
+- Basic systemd restart policy confirmed present in `system/aura.service`:
+  `Restart=on-failure`, `RestartSec=5`, `StartLimitBurst=3`,
+  `StartLimitIntervalSec=60`.
+- `docs/SELF_HEALING.md` added to `wayaura-core` with full documentation.
+- Commits: `416bb5e` (implementation), `248a97e` (RELEASE_NOTES fixup).
+
 ## What is pending
 
 - Audio tuning values (`asound.conf`, audio detect thresholds). These
@@ -88,8 +112,10 @@ validated on the owner's device. The following are now true:
   opt-in). Documented in `wayaura-core` `RELEASE_NOTES.md` and
   `docs/AUDIO.md` as `known issue / not blocking`. Reliable workaround:
   start without USB, plug after greeting.
-- Self-healing, autostart improvements, pause/resume — roadmap items
-  in `wayaura-core` `RELEASE_NOTES.md`, not yet scoped as tasks.
+- Autostart improvements, pause/resume — roadmap items in
+  `wayaura-core` `RELEASE_NOTES.md`, not yet scoped as tasks.
+- Phase 2B (deferred from Phase 2): `Type=notify` systemd watchdog,
+  `WatchdogSec`, `sd_notify` heartbeat from `assistant.py` main loop.
 
 ## What is explicitly out of scope here
 

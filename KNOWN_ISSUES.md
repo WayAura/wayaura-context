@@ -14,10 +14,16 @@
   The default routing since commit `5b2134c` in `wayaura-core` is
   `usb_in_hdmi_out` (USB capture + HDMI playback), which avoids the
   mute issue for most scenarios. `AURA_FORCE_USB_PLAYBACK=1` is an
-  explicit opt-in. Full detail in `wayaura-core` `RELEASE_NOTES.md`
-  and `docs/AUDIO.md`.
+  explicit opt-in. The Phase 2 self-healing layer will attempt
+  reroute to `builtin_fallback` on startup failure, but hardware-level
+  mute recovery is not guaranteed. Full detail in `wayaura-core`
+  `RELEASE_NOTES.md` and `docs/AUDIO.md`.
 - **Audio tuning** (`asound.conf`, detect thresholds, device-specific
   overrides) remains a red zone requiring owner-and-device decisions.
+- **Phase 2B deferred:** `Type=notify` systemd watchdog, `WatchdogSec`,
+  `sd_notify` heartbeat. Not implemented. Documented in
+  `wayaura-core` `system/aura.service`, `docs/SELF_HEALING.md`,
+  and `RELEASE_NOTES.md`. Owner approval required before opening.
 - **Documentation drift risk** between `wayaura-context` and
   `wayaura-core` if the two repositories are edited independently
   without a consistency pass.
@@ -34,6 +40,10 @@
 - Phase 1 autostart/audio-fallback static validation — **on-device
   validated** by owner this session. Wake, commands, stop, ack all
   confirmed working on the target Raspberry Pi.
+- Self-healing / recovery absent — **closed** (Phase 2, commits
+  `416bb5e`, `248a97e`). AuraHealthMonitor state machine live;
+  startup + runtime recovery bounded by budget; docs/SELF_HEALING.md
+  added.
 
 ## Ongoing caution points
 
