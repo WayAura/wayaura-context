@@ -64,3 +64,29 @@ If a task spans both repositories, document the structural side here
 and link to `wayaura-core` for the runtime side. Do not duplicate
 runtime documentation into this repository, and do not embed
 continuity documentation into `wayaura-core`.
+
+---
+
+## Publishing policy
+
+`wayaura-context` (this repository) is updated in sync with each
+completed stage in `wayaura-core`. The mode is: every completed
+engineering stage in `wayaura-core` triggers a matching factual update
+here — not a copy of runtime files, but an update to `CURRENT_STATE.md`,
+`KNOWN_ISSUES.md`, `NEXT_WORK.md`, and `CHANGELOG.md` reflecting what
+changed and what the current truth is.
+
+`wayaura-context` is public. `wayaura-core` is private. The split is
+permanent and intentional. The following content must never appear in
+`wayaura-context`:
+
+- Runtime code (`assistant.py`, `aura_core.py`, `phrase_library.py`,
+  scripts, service templates).
+- Configuration templates (`.env.example`, `.env.config.example`) or
+  any real configuration values.
+- JSON phrase/data files.
+- Any secrets, device identifiers, local file paths, or install-time
+  artifacts.
+
+`wayaura-context` may reference `wayaura-core` commits by hash when
+recording what changed, but does not reproduce the diff or content.

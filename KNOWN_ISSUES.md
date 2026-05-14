@@ -2,56 +2,38 @@
 
 ## Active issues
 
-- Real install/start smoke on the target Raspberry Pi / device has not
-  yet been performed. Only static smoke (`bash -n`, `ast.parse`,
-  `json.load`) has been run inside `wayaura-core`. Owner / device
-  validation is pending.
-- Reliable autostart and audio fallback (Phase 1 in `wayaura-core`)
-  are implemented in core and statically validated, but not yet
-  validated on the target Raspberry Pi. Implementation covers a
-  udev-settle wait in `system/aura.service`, an audio-startup wait
-  with retry in `start.sh`, a profile-enum export via
-  `AURA_AUDIO_PROFILE`, a `PA_ALSA_PLUGHW=1` export, and a playback
-  open-probe with HDMI / bcm2835 fallback recorded as
-  `AURA_PLAYBACK_PROBE` in `scripts/audio_detect.sh`. Static
-  validation in sandbox: `bash -n` on both shell entry points
-  passes; `systemd-analyze verify system/aura.service` emits only
-  the expected `__WORKDIR__` install-template warning;
-  `scripts/audio_detect.sh start` on a host without USB produces a
-  safe degraded `runtime/audio.env` with
-  `AURA_PLAYBACK_PROBE=unknown`. Remaining: on-device cold-boot
-  cases (no USB, stable USB mic, MicA / AB13X playback-failure),
-  confirmation that `PA_ALSA_PLUGHW=1` is in effect for the
-  running service, and RMS / `MIC_DEBUG` capture if needed. Until
-  those pass, the symptom is mitigated but not closed.
-- Audio tuning in `wayaura-core` (e.g. `system/asound.conf`, audio
-  detect thresholds, any device-specific overrides) requires
-  owner-and-device-specific decisions and remains a red zone.
-- Single-USB audio card scenario: with exactly one USB audio card
-  carrying both microphone and headphones / AUX, Aura starts but
-  neither hears nor is heard. Adding a second USB audio adapter (with
-  anything plugged) restores both directions; swapping which physical
-  attachment goes to which card still works. The
-  `scripts/audio_detect.sh` priority 0 single-USB combo path selects
-  `hw:N,0` for capture and `plughw:N,0` for playback on the same
-  card, and `install.sh` removes `/etc/asound.conf` for the 1-USB
-  scenario, so no `dmix`/`dsnoop` profile is in place. Primary
-  hypothesis: this is likely a device / ALSA full-duplex limitation
-  of the single USB card rather than an Aura routing-selection bug,
-  but this requires on-device proof (simultaneous `arecord` + `aplay`
-  on the same card) before any code or config change. That proof has
-  not yet been performed. Until it is, no audio routing code or
-  `asound.conf` changes are permitted. See
-  [`NEXT_WORK.md`](NEXT_WORK.md) for the bounded next step.
-- Earlier-recorded `PA_ALSA_PLUGHW=1` documentation drift in
-  `wayaura-core` (docs mentioned it as exported by `start.sh` while
-  the code did not) has been addressed by Phase 1: `start.sh` now
-  exports `PA_ALSA_PLUGHW=1`. On-device confirmation that this is
-  actually in effect for the running service is still part of the
-  pending Phase 1 validation above.
-- Documentation drift between `wayaura-context` and `wayaura-core`
-  remains a risk if the two repositories are edited independently
+- **AB13X USB Audio: start with adapter already plugged** (`known issue
+  / not blocking`). On the current device setup, starting Aura with
+  the AB13X USB combo adapter already connected and
+  `AURA_FORCE_USB_PLAYBACK=1` set may result in a mute Aura despite
+  successful probe. This is a hardware-specific characteristic of this
+  adapter, not a code regression. The reliable workaround is: start
+  without the USB adapter, then plug it in after Aura has greeted.
+  In that mode (start → then plug) the system is stable: capture via
+  USB, playback via HDMI, stop-phrases and stop-ack work correctly.
+  The default routing since commit `5b2134c` in `wayaura-core` is
+  `usb_in_hdmi_out` (USB capture + HDMI playback), which avoids the
+  mute issue for most scenarios. `AURA_FORCE_USB_PLAYBACK=1` is an
+  explicit opt-in. Full detail in `wayaura-core` `RELEASE_NOTES.md`
+  and `docs/AUDIO.md`.
+- **Audio tuning** (`asound.conf`, detect thresholds, device-specific
+  overrides) remains a red zone requiring owner-and-device decisions.
+- **Documentation drift risk** between `wayaura-context` and
+  `wayaura-core` if the two repositories are edited independently
   without a consistency pass.
+
+## Closed issues (this session)
+
+- Stop-phrase interrupt during TTS broken — **closed** (commits
+  `0efe9ce`, `90a2152` in `wayaura-core`).
+- Audible stop-ack absent — **closed** (direct `_play_wav_file` call
+  in `_stop_listener`, commit `90a2152`).
+- Single-USB full-duplex mute (AB13X playback silent) — **mitigated**
+  by `usb_in_hdmi_out` default routing (commit `5b2134c`). Not fully
+  closed at hardware level; see active issue above.
+- Phase 1 autostart/audio-fallback static validation — **on-device
+  validated** by owner this session. Wake, commands, stop, ack all
+  confirmed working on the target Raspberry Pi.
 
 ## Ongoing caution points
 

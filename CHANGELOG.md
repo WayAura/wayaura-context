@@ -7,7 +7,29 @@ to that release and a new Unreleased section is started above it.
 
 ## Unreleased
 
-### Added
+### Added (runtime stabilization + context sync — 2026-05-14)
+
+- `CURRENT_STATE.md`, `KNOWN_ISSUES.md`, `NEXT_WORK.md` updated to
+  reflect completed runtime stabilization pass in `wayaura-core`
+  (commits `0efe9ce`, `90a2152`, `5b2134c`, `070473e`):
+  - Stop-phrase interrupt restored; audible stop-ack added.
+  - `AURA_PLAYBACK_PROFILE` exported by `audio_detect.sh`;
+    playback probe logged by `assistant.py`.
+  - Single USB combo routing policy: `usb_in_hdmi_out` default,
+    `single_usb_combo` opt-in via `AURA_FORCE_USB_PLAYBACK=1`.
+  - `RELEASE_NOTES.md` added to `wayaura-core` with stage summary,
+    known limitations, and roadmap.
+- `KNOWN_ISSUES.md` closed stale Phase 1 / static-validation items;
+  added AB13X hot-plug limitation as `known issue / not blocking` with
+  workaround; added Closed issues section for session record.
+- `NEXT_WORK.md` replaced Phase 1 validation checklist with current
+  practical direction (roadmap items, limitation note).
+- Publishing policy: `wayaura-context` is updated in sync with each
+  completed `wayaura-core` stage. Runtime files (`assistant.py`,
+  scripts, configs, JSON data) do not appear here; only high-level
+  factual state, issue status, and direction links.
+
+### Added (earlier)
 - `CURRENT_STATE.md`, `NEXT_WORK.md`, `KNOWN_ISSUES.md` — recorded
   that `wayaura-core` Phase 1 (reliable autostart + audio fallback)
   has been implemented and statically validated in sandbox, but
