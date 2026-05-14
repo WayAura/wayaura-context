@@ -50,6 +50,10 @@ truth lives in `wayaura-core`.
 
 ## What is in progress
 
+- The only active runtime work item is on-device Phase 1 validation on
+  the target Raspberry Pi. Until that validation is complete, no new
+  autostart or audio-fallback code changes are permitted in
+  `wayaura-core`.
 - Holding `wayaura-context` stable as the continuity entry point while
   `wayaura-core` evolves on its engineering cadence.
 - Maintaining cross-references to `wayaura-core` without duplicating

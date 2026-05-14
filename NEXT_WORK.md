@@ -98,10 +98,9 @@ single-USB or HDMI-fallback symptom is resolved. The previously
 recorded single-USB full-duplex proof step still stands as a
 separate, narrower investigation; see the section below.
 
-`POSTCHANGECHECKLIST.md` does not exist in `wayaura-core` yet, so
-on-device results should be recorded against
-`TESTSCENARIOS.md` and `SECURITY.md` until a dedicated checklist
-file is introduced under a separate task.
+On-device results should be recorded against `TESTSCENARIOS.md` in
+`wayaura-core`. No new checklist files should be introduced without an
+explicit Owner decision.
 
 ## Earlier bounded step: single-USB audio proof
 

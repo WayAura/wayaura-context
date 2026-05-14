@@ -39,7 +39,9 @@
   hypothesis: this is likely a device / ALSA full-duplex limitation
   of the single USB card rather than an Aura routing-selection bug,
   but this requires on-device proof (simultaneous `arecord` + `aplay`
-  on the same card) before any code or config change. See
+  on the same card) before any code or config change. That proof has
+  not yet been performed. Until it is, no audio routing code or
+  `asound.conf` changes are permitted. See
   [`NEXT_WORK.md`](NEXT_WORK.md) for the bounded next step.
 - Earlier-recorded `PA_ALSA_PLUGHW=1` documentation drift in
   `wayaura-core` (docs mentioned it as exported by `start.sh` while
