@@ -103,6 +103,20 @@ The following are now true:
 - `docs/SELF_HEALING.md` added to `wayaura-core` with full documentation.
 - Commits: `416bb5e` (implementation), `248a97e` (RELEASE_NOTES fixup).
 
+## What is true right now (Phase 2A.1 — usb_combo risky path)
+
+Phase 2A.1 pushed to `wayaura-core` main (commit `70165a7`):
+
+- `_is_risky_path()`: triggers when `AURA_AUDIO_PROFILE=usb_combo` +
+  USB hw-path prefix + `IS_FALLBACK!=1` — class-based, no device names.
+- `_find_hdmi_device()`: parses `aplay -l`, returns HDMI `hw:N,M` for
+  `AURA_PLAYBACK_PRIMARY` rewrite during recovery.
+- `startup_audio_check()` now detects cold-start mute path and enters
+  recovery even when ALSA probe is formally OK.
+- Stop-listener confirmed already optimal (50 ms polling, flag before ack);
+  `[STOP] stop propagated in <N>ms` diagnostic log added.
+- No new env flags. Red zones untouched.
+
 ## What is pending
 
 - Audio tuning values (`asound.conf`, audio detect thresholds). These

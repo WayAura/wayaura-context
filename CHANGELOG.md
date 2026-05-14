@@ -7,6 +7,23 @@ to that release and a new Unreleased section is started above it.
 
 ## Unreleased
 
+
+### Added (Phase 2A.1 — usb_combo risky path + stop telemetry — 2026-05-14)
+
+- `health.py`: `_is_risky_path()` — class-based trigger for cold-start mute on
+  single USB combo (`AURA_AUDIO_PROFILE=usb_combo` + USB hw-path prefix +
+  `IS_FALLBACK!=1`). No hardcoded device names. Commit `70165a7`.
+- `health.py`: `_find_hdmi_device()` — parses `aplay -l`, returns first HDMI/bcm
+  `hw:N,M` or `""`. Used in recovery to rewrite `AURA_PLAYBACK_PRIMARY`.
+- `health.py`: `startup_audio_check()` now enters `_recover()` when risky path is
+  detected, even if standard validation passes. Budget unchanged (shared 2-attempt
+  counter from Phase 2). No new env flags.
+- `assistant.py`: `[STOP] stop propagated in <N>ms` diagnostic timing log. Stop
+  architecture confirmed already optimal (50 ms polling, flag before ack).
+- `docs/SELF_HEALING.md`: new "usb_combo risky path detection" section with trigger
+  conditions, recovery sequence, and example logs.
+- `RELEASE_NOTES.md`: Phase 2A.1 subsection added.
+
 ### Added (Phase 2 — bounded self-healing layer — 2026-05-14)
 
 - `health.py` (`AuraHealthMonitor`) added to `wayaura-core`: state machine
