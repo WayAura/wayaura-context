@@ -8,6 +8,21 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Updated (Audio Policy v2 docs pass — 2026-05-15)
+
+- `wayaura-core` `README.md`: updated AURA_AUDIO_PROFILE table, added autostart
+  section, added known limitations (single USB without headset, PulseAudio/GUI).
+- `wayaura-core` `docs/AUDIO.md`: new profile mapping table, Single USB + HDMI
+  section, known limitations section.
+- `wayaura-core` `docs/SELF_HEALING.md`: updated _is_risky_path() conditions,
+  3 example log scenarios, autostart compatibility section.
+- `wayaura-core` `docs/AUTOSTART.md`: troubleshoot checklist verified/completed.
+- `wayaura-core` `TESTSCENARIOS.md`: T5/T6 crash recovery verified.
+- `wayaura-context` `README.md`: Статус проекта section added.
+- `wayaura-context` `CURRENT_STATE.md`: current system state summary added.
+- `wayaura-context` `NEXT_WORK.md`: updated to reflect Audio Policy v2 completion.
+
+
 ### Added (Audio Policy v2 + Autostart — 2026-05-15)
 
 - `start.sh`: AURA_AUDIO_PROFILE classifier rewritten — now derives value from

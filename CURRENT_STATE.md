@@ -166,3 +166,33 @@ repositories. Work that touches behavior, install/start, or
 configuration moves to `wayaura-core` under Owner approval; work that
 touches structure, role definitions, onboarding, or continuity stays
 here.
+
+## Текущее состояние системы (на 2026-05-15)
+
+Краткий срез: что реально работает на целевом Raspberry Pi.
+
+**Аудио — стабильно:**
+- Cold start без USB → `playback_only_degraded`, HDMI-вывод, Аура слышна
+- Cold start с USB + гарнитура/AUX → Аура слышит и слышна (usb_combo или usb_mic_hdmi_out)
+- AURA_AUDIO_PROFILE теперь строится из AURA_PLAYBACK_PROFILE (Audio Policy v2, commit `bc8a3a7`)
+- Новый первоклассный профиль: `usb_mic_hdmi_out` (USB-capture + HDMI-playback)
+
+**Аудио — известные ограничения:**
+- Single USB без гарнитуры → может уйти в usb_combo с беззвучным USB-выводом
+- PulseAudio/GUI конфликты → ALSA-маршрут перехватывается, не решается внутри Ауры
+
+**Self-healing:**
+- `_is_risky_path()` проверяет как AURA_AUDIO_PROFILE, так и AURA_PLAYBACK_PROFILE
+- `usb_mic_hdmi_out` / `usb_in_hdmi_out` не считаются рискованными (HDMI-вывод безопасен)
+- `usb_combo` / `single_usb_combo` — рискованные, health входит в recovery
+
+**Автозапуск:**
+- `aura.service` настроен, `systemctl enable aura.service` включает автозапуск на boot
+- Restart=on-failure, StartLimitBurst=3/60s
+- На реальной Pi: `Active: active (running)` после reboot
+
+**Документация в wayaura-core:**
+- `docs/AUTOSTART.md` — включение автозапуска, troubleshoot
+- `TESTSCENARIOS.md` — acceptance checklist T1–T6
+- `docs/SELF_HEALING.md` — self-healing логика, примеры логов
+- `docs/AUDIO.md` — карта профилей

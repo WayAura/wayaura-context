@@ -17,6 +17,25 @@ This repo is the source of truth for:
 This repo is **not** the private runtime/code repository.
 Operational runtime files belong in `wayaura-core`.
 
+## Статус проекта
+
+Aura 0.1 — голосовой ассистент для Raspberry Pi (автомобильный + домашний сценарии).
+
+**Что реализовано:**
+- Голосовое управление (Yandex Cloud STT/TTS/LLM), распознавание wake-word
+- Адаптивная аудио-маршрутизация: USB-микрофон + HDMI-вывод из коробки
+- Self-healing: ограниченный механизм восстановления аудио при старте
+- Автозапуск через systemd (`aura.service`) с политикой restart-on-failure
+- In-car сценарий: USB-переходник с микрофоном → AUX или HDMI в головное устройство
+
+**Известные ограничения:**
+- Single USB-адаптер без подключённой гарнитуры: физический вывод может молчать
+  (профиль `usb_combo`). Дефолтное поведение (HDMI-вывод) от этого защищает.
+- Переключение устройств через PulseAudio/GUI во время работы может ломать
+  ALSA-маршрутизацию. Headless-окружение рекомендовано.
+
+**Runtime-код:** https://github.com/WayAura/wayaura-core (приватный)
+
 ## Reading Order
 
 A new agent should read files in this order:
