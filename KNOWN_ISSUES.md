@@ -3,7 +3,11 @@
 ## Active issues
 
 - **AB13X USB Audio: start with adapter already plugged** (`known issue
-  / not blocking`). On the current device setup, starting Aura with
+  / not blocking`). Since Audio Policy v2, the default profile for single
+  USB + HDMI is `usb_mic_hdmi_out` (capture=USB, playback=HDMI), which
+  avoids the mute issue. Self-healing classifies `single_usb_combo` as
+  risky and reroutes to `builtin_fallback` on recovery. `AURA_FORCE_USB_PLAYBACK=1`
+  is the only path to USB playback and explicitly opted-in. On the current device setup, starting Aura with
   the AB13X USB combo adapter already connected and
   `AURA_FORCE_USB_PLAYBACK=1` set may result in a mute Aura despite
   successful probe. This is a hardware-specific characteristic of this

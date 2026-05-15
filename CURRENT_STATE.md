@@ -117,6 +117,22 @@ Phase 2A.1 pushed to `wayaura-core` main (commit `70165a7`):
   `[STOP] stop propagated in <N>ms` diagnostic log added.
 - No new env flags. Red zones untouched.
 
+## What is true right now (Audio Policy v2 + Autostart — 2026-05-15)
+
+Audio Policy v2 pushed to `wayaura-core` main (commit `bc8a3a7`):
+
+- `AURA_AUDIO_PROFILE` is now derived from `AURA_PLAYBACK_PROFILE` in
+  `start.sh` via explicit `case` mapping. New first-class value:
+  `usb_mic_hdmi_out` (single USB + HDMI split — previously classified
+  incorrectly as `usb_combo` or `usb_capture_hdmi_playback`).
+- `health.py._is_risky_path()` now checks both `AURA_AUDIO_PROFILE` and
+  `AURA_PLAYBACK_PROFILE`. `usb_mic_hdmi_out` / `usb_in_hdmi_out` are
+  NOT risky. `single_usb_combo` / `mics_only_usb_playback` ARE risky.
+- `docs/AUTOSTART.md` added with enable/troubleshoot guide.
+- `TESTSCENARIOS.md` added (T1–T6 acceptance checklist).
+- audio_detect.sh Priority 0 logic unchanged (already correct).
+- No new env flags. No hardcoded device names.
+
 ## What is pending
 
 - Audio tuning values (`asound.conf`, audio detect thresholds). These

@@ -8,6 +8,25 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Added (Audio Policy v2 + Autostart — 2026-05-15)
+
+- `start.sh`: AURA_AUDIO_PROFILE classifier rewritten — now derives value from
+  `AURA_PLAYBACK_PROFILE` (audio_detect.sh) via `case` mapping. Introduced
+  first-class `usb_mic_hdmi_out` value for single USB + HDMI split path.
+  Commit `bc8a3a7`.
+- `health.py`: `_is_risky_path()` now triggers on EITHER `AURA_AUDIO_PROFILE=usb_combo`
+  OR `AURA_PLAYBACK_PROFILE in {single_usb_combo, mics_only_usb_playback}`. Accepts
+  both `IS_FALLBACK` and `AURA_PLAYBACK_IS_FALLBACK` keys. `usb_mic_hdmi_out` /
+  `usb_in_hdmi_out` are explicitly NOT risky (HDMI playback = safe).
+- `docs/AUTOSTART.md`: new file — enable/disable autostart, check status, troubleshoot.
+- `TESTSCENARIOS.md`: new file — T1–T6 acceptance test checklist.
+- `docs/AUDIO.md`: updated profile table (AURA_PLAYBACK_PROFILE ↔ AURA_AUDIO_PROFILE
+  mapping), Single USB + HDMI section.
+- `docs/SELF_HEALING.md`: updated trigger conditions, 3 example log scenarios,
+  Autostart & self-healing section.
+- `RELEASE_NOTES.md`: Audio Policy v2 section.
+
+
 ### Added (Phase 2A.1 — usb_combo risky path + stop telemetry — 2026-05-14)
 
 - `health.py`: `_is_risky_path()` — class-based trigger for cold-start mute on
