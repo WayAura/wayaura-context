@@ -13,6 +13,20 @@ Audio Policy v2 is complete (`wayaura-core` commit `bc8a3a7`):
 - Autostart via systemd is configured and working on the target Pi
 - Known limitations documented in `wayaura-core` `README.md` and `docs/AUDIO.md`
 
+Two recent `wayaura-core` changes are mitigated in code but **pending
+Pi validation** before they can be called fully closed:
+
+- **Autostart single-instance guard** (`wayaura-core` commit `e896582`).
+  Duplicate runtime starts (systemd + manual, or two manual) are
+  refused with an explicit lock log. Acceptance scenarios A1–A6 in
+  `wayaura-core` `TESTSCENARIOS.md` still need owner-device confirmation.
+- **Phase 2A.2 — aplay runtime failures surfaced to self-healing**
+  (`wayaura-core` commit `7c41a88`). Non-zero `aplay` exits during
+  playback now reach the health monitor and route through bounded
+  recovery; repeated runtime symptoms are coalesced. No new env flags,
+  no retry-loop expansion. Acceptance T8 plus T1–T7 regression in
+  `TESTSCENARIOS.md` are pending.
+
 The next work directions (roadmap, not yet active tasks):
 
 - **PulseAudio/DE integration:** resolve ALSA route conflicts when a desktop
@@ -45,6 +59,10 @@ None of these are active tasks. Owner approval required before opening.
 - **PulseAudio/GUI:** switching audio devices via system GUI during Aura runtime
   can capture the ALSA route. Use headless environment for reliable operation.
 - **Phase 2B deferred:** full systemd watchdog not yet implemented.
+- **Duplicate-start guard:** mitigated in `wayaura-core` (`e896582`),
+  not yet confirmed on the target Pi (A1–A6 pending).
+- **aplay runtime blind spot:** mitigated in `wayaura-core` (`7c41a88`),
+  not yet confirmed on the target Pi (T8 + T1–T7 regression pending).
 
 ## What not to touch without Owner approval
 

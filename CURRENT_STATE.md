@@ -133,6 +133,41 @@ Audio Policy v2 pushed to `wayaura-core` main (commit `bc8a3a7`):
 - audio_detect.sh Priority 0 logic unchanged (already correct).
 - No new env flags. No hardcoded device names.
 
+## What is true right now (Autostart single-instance guard — 2026-05-19)
+
+Pushed to `wayaura-core` main (commit `e896582`):
+
+- The Aura runtime now has a single-instance guard covering both the
+  systemd-managed start path and manual launches. A second concurrent
+  start is refused with an explicit lock log instead of producing a
+  duplicate runtime.
+- `docs/AUTOSTART.md` and `TESTSCENARIOS.md` extended with the
+  A1–A6 acceptance scenarios covering systemd + manual start
+  interactions and lock-release on clean exit.
+- No new env flags. No changes to audio routing or self-healing
+  budgets.
+- **Status:** mitigated in code, **pending Pi validation** (A1–A6).
+  Not claimed as fully closed until the owner confirms on the target
+  device.
+
+## What is true right now (Phase 2A.2 — aplay runtime failures surfaced — 2026-05-19)
+
+Pushed to `wayaura-core` main (commit `7c41a88`):
+
+- Non-zero `aplay` runtime exits are now surfaced to the bounded
+  self-healing layer instead of being silently swallowed at the
+  playback boundary. Repeated runtime symptoms within the existing
+  budget window are coalesced in-process so they do not inflate
+  recovery attempts.
+- No new env flags. No expansion of the retry-loop. The shared
+  startup + runtime budget from Phase 2 is unchanged.
+- `docs/SELF_HEALING.md` and `RELEASE_NOTES.md` updated to describe
+  the runtime-failure surface and coalescing behavior. `TESTSCENARIOS.md`
+  T8 added for runtime aplay failure validation.
+- **Status:** mitigated in code, **pending Pi validation** (T8 plus
+  T1–T7 regression on the target device). Not claimed as fully closed
+  until owner confirmation.
+
 ## What is pending
 
 - Audio tuning values (`asound.conf`, audio detect thresholds). These
@@ -146,6 +181,10 @@ Audio Policy v2 pushed to `wayaura-core` main (commit `bc8a3a7`):
   `wayaura-core` `RELEASE_NOTES.md`, not yet scoped as tasks.
 - Phase 2B (deferred from Phase 2): `Type=notify` systemd watchdog,
   `WatchdogSec`, `sd_notify` heartbeat from `assistant.py` main loop.
+- Pi validation of the autostart single-instance guard (A1–A6,
+  `wayaura-core` commit `e896582`) and of the aplay runtime-failure
+  surface (T8 plus T1–T7 regression, `wayaura-core` commit `7c41a88`).
+  Both are mitigated in code, not yet confirmed on hardware.
 
 ## What is explicitly out of scope here
 
@@ -167,7 +206,7 @@ configuration moves to `wayaura-core` under Owner approval; work that
 touches structure, role definitions, onboarding, or continuity stays
 here.
 
-## Текущее состояние системы (на 2026-05-15)
+## Текущее состояние системы (на 2026-05-19)
 
 Краткий срез: что реально работает на целевом Raspberry Pi.
 
@@ -190,6 +229,15 @@ here.
 - `aura.service` настроен, `systemctl enable aura.service` включает автозапуск на boot
 - Restart=on-failure, StartLimitBurst=3/60s
 - На реальной Pi: `Active: active (running)` после reboot
+- Защита от двойного запуска (single-instance guard) добавлена в
+  `wayaura-core` (commit `e896582`): повторный старт отказывается с
+  явной записью о блокировке. Pending Pi validation сценариев A1–A6.
+
+**Self-healing (Phase 2A.2):**
+- Ненулевые runtime-фейлы `aplay` теперь поднимаются в health-монитор
+  и проходят через bounded recovery (commit `7c41a88`). Повторные
+  симптомы коалесцируются в процессе; бюджет попыток из Phase 2 не
+  расширяется. Pending Pi validation T8 и регрессии T1–T7.
 
 **Документация в wayaura-core:**
 - `docs/AUTOSTART.md` — включение автозапуска, troubleshoot

@@ -8,6 +8,24 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Updated (Autostart single-instance guard + Phase 2A.2 sync — 2026-05-19)
+
+- `CURRENT_STATE.md`: added autostart single-instance guard section
+  (`wayaura-core` commit `e896582`) and Phase 2A.2 — aplay runtime
+  failures surfaced to self-healing (`wayaura-core` commit `7c41a88`).
+  Both marked mitigated in code, pending Pi validation (A1–A6 and
+  T8 + T1–T7 regression respectively). Russian status summary updated
+  to 2026-05-19.
+- `NEXT_WORK.md`: added pending-validation block covering the two new
+  `wayaura-core` changes; known-limitations list extended with the
+  duplicate-start and aplay-runtime mitigations as not-yet-confirmed
+  on hardware.
+- `KNOWN_ISSUES.md`: added duplicate Aura runtime start and aplay
+  runtime failure blind spot as active issues with status
+  `mitigated, pending Pi validation`. Both reference the corresponding
+  `wayaura-core` commits and acceptance scenarios.
+
+
 ### Updated (Audio Policy v2 docs pass — 2026-05-15)
 
 - `wayaura-core` `README.md`: updated AURA_AUDIO_PROFILE table, added autostart

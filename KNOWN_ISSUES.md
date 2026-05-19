@@ -31,6 +31,18 @@
 - **Documentation drift risk** between `wayaura-context` and
   `wayaura-core` if the two repositories are edited independently
   without a consistency pass.
+- **Duplicate Aura runtime start** — **mitigated, pending Pi
+  validation**. `wayaura-core` commit `e896582` adds a single-instance
+  guard so a second concurrent start (systemd or manual) is refused
+  with an explicit lock log. Acceptance scenarios A1–A6 in
+  `wayaura-core` `TESTSCENARIOS.md` still need owner confirmation on
+  the target Pi before this can be closed.
+- **`aplay` runtime failure blind spot** — **mitigated, pending Pi
+  validation**. `wayaura-core` commit `7c41a88` (Phase 2A.2) surfaces
+  non-zero `aplay` runtime exits to the bounded self-healing layer
+  and coalesces repeated symptoms in-process; budget unchanged, no
+  new env flags. T8 plus T1–T7 regression in `TESTSCENARIOS.md`
+  remain pending owner confirmation on the target Pi.
 
 ## Closed issues (this session)
 
