@@ -5,7 +5,23 @@ This file is the short operational bridge between
 practical move. It is not a roadmap. It is replaced as the front of
 work moves.
 
-## Current practical direction
+## Current practical direction — Aura v1 (from 2026-09-23)
+
+The front of work is **Aura v1** in `wayaura-core` `aura-v1/` (branch
+`feature/aura-v1-m0-realtime-roundtrip`). Legacy Aura 0.1 and New Aura are history and
+experience; the Legacy directions below are paused, not deleted.
+
+Next steps, in order:
+
+1. **Live voice test on the stand by the Owner** with the laptop panel (`aura`): speech into
+   the USB microphone, reply from the TV, stop key, exit, Legacy returns.
+2. By its results, the Owner chooses the next stage: Aura v1 autostart instead of Legacy on the
+   Pi, or the phone as the voice source and remote (same control protocol).
+3. Later (not scoped): OBD2 adapter over Bluetooth, car speakers, car installation, wake-word.
+
+Not now: Bluetooth, OBD2, phone, wake-word, systemd autostart, car installation.
+
+## Legacy Aura 0.1 — paused direction (before 2026-09-23)
 
 Audio Policy v2 is complete (`wayaura-core` commit `bc8a3a7`):
 - `usb_mic_hdmi_out` is the first-class default profile for single USB + HDMI

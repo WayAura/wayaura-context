@@ -8,6 +8,22 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Added (Aura v1 — new cycle foundation — 2026-09-23)
+
+- New development cycle **Aura v1** on a saved Yandex AI Studio voice agent. Legacy Aura 0.1 and
+  New Aura are kept as history and experience; nothing of them was changed.
+- `wayaura-core` (`aura-v1/`, branch `feature/aura-v1-m0-realtime-roundtrip`): Milestone 0
+  Realtime API probe and `FINDINGS.md`; Raspberry Pi inventory, backup and rollback plan
+  (`docs/PI_MIGRATION.md`); voice service with replaceable audio source/sink, control channel
+  (`docs/CONTROL_PROTOCOL.md`), laptop control panel (`aura`), unit tests and a smoke check.
+- `wayaura-core`: unpushed New Aura work from the stand Pi saved from a laptop backup —
+  `feature/continuous-realtime-runner`, `backup/pi-state-20260923`.
+- `CURRENT_STATE.md`: new Aura v1 layer and target picture (Pi + OBD2 + phone); Russian summary.
+- `NEXT_WORK.md`: Aura v1 is the current front; Legacy directions kept as paused.
+- `KNOWN_ISSUES.md`: Aura v1 known issues.
+- `MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md`: checkpoint.
+
+
 ### Updated (Autostart single-instance guard + Phase 2A.2 sync — 2026-05-19)
 
 - `CURRENT_STATE.md`: added autostart single-instance guard section

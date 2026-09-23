@@ -2,6 +2,25 @@
 
 ## Active issues
 
+### Aura v1 (from 2026-09-23)
+
+- **Half-duplex.** While Aura v1 thinks or speaks, microphone audio is not sent (echo guard for
+  the TV speakers), so the user cannot interrupt her by voice — only with the panel's stop key.
+  Lifted later by echo cancellation or the phone microphone.
+- **No wake-word.** Aura v1 answers any speech near the microphone, including room conversation
+  and TV sound (observed on the stand). Accepted for the stand by the Owner; idle sleep after
+  120 s of silence limits cloud streaming.
+- **Stand Pi drops off the network.** Twice on 2026-09-23 the Pi stopped answering SSH/ping for
+  several minutes without rebooting (Wi-Fi). Affects development and Aura v1 (reconnects).
+- **Cost per hour not verified** against the official tariff (the AI Studio pricing page was not
+  reachable for automation). Traffic is measured by design: ≈ 170 MB/hour of continuous listening.
+- **Key hygiene.** The Aura v1 API key passed through a chat and should be rotated (Owner, planned).
+  A plaintext key file sits in the Pi home directory; left untouched by Owner decision.
+- **No autostart for Aura v1.** It runs only during a laptop panel session; Legacy Aura 0.1
+  stays the enabled service. By Owner decision for this stage.
+
+### Legacy Aura 0.1
+
 - **AB13X USB Audio: start with adapter already plugged** (`known issue
   / not blocking`). Since Audio Policy v2, the default profile for single
   USB + HDMI is `usb_mic_hdmi_out` (capture=USB, playback=HDMI), which

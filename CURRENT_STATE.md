@@ -14,6 +14,46 @@ Where this repository and any older standalone document disagree, this
 repository wins for continuity, role, and structure topics; runtime
 truth lives in `wayaura-core`.
 
+## New development cycle: Aura v1 (from 2026-09-23)
+
+The active development cycle is now **Aura v1**, built on a saved Yandex
+AI Studio voice agent (Realtime API). Legacy Aura 0.1 and New Aura (the
+sections below) are the project's history and experience: they are kept
+as they are, may be reused where they solved a problem well, and are not
+binding rules or architecture for Aura v1. The Owner/Search/Computer
+governance and red zones below are likewise reference only for this cycle.
+
+What is true for Aura v1 right now:
+
+- Code lives in `wayaura-core` under `aura-v1/` on branch
+  `feature/aura-v1-m0-realtime-roundtrip`; not merged into `main`.
+- Milestone 0 facts about the Realtime API are recorded in
+  `aura-v1/FINDINGS.md` in `wayaura-core` (agent by ID, 16/24/44.1 kHz,
+  no 48 kHz, server VAD stable, manual mode unreliable,
+  `input_audio_buffer.clear` unsupported, cancel only before audio).
+- Foundation on the stand Raspberry Pi: a voice service with replaceable
+  audio source/sink (today USB mic + HDMI TV), half-duplex echo guard,
+  idle sleep, reconnects, and a WebSocket + JSON control channel meant for
+  the laptop panel now and the phone app later.
+- Laptop control panel (`aura` command): checks, start/stop, live event
+  feed, text questions, stopping a reply. Aura v1 runs only during a panel
+  session as a transient unit; Legacy Aura is stopped for the session and
+  returns automatically when v1 stops (verified on hardware).
+- Legacy Aura 0.1 remains the enabled service on the Pi. No autostart for
+  Aura v1 yet (Owner decision).
+- Unpushed New Aura work found on the Pi was saved to GitHub from a laptop
+  backup: `feature/continuous-realtime-runner` and
+  `backup/pi-state-20260923`.
+- Live voice test by the Owner on the stand: pending.
+- Checkpoint: [`MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md`](MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md).
+
+Target picture (not implemented): the Pi is Aura's brain and voice in a
+protected enclosure in the car, powered from the car battery, sound through
+the car speakers; an own OBD2 adapter connects over Bluetooth to both the
+Pi and the phone; the phone app is the main remote and the primary
+microphone (cabin microphones are the fallback); Aura voices vehicle data
+on command. SSH and the laptop are a development channel only.
+
 ## What is true right now
 
 - The repository split is physically realized. It is not a future
@@ -244,3 +284,14 @@ here.
 - `TESTSCENARIOS.md` — acceptance checklist T1–T6
 - `docs/SELF_HEALING.md` — self-healing логика, примеры логов
 - `docs/AUDIO.md` — карта профилей
+
+## Aura v1 — краткий срез (на 2026-09-23)
+
+- Новый цикл разработки. Legacy Aura 0.1 и New Aura — история и опыт, не трогаются.
+- Код: `wayaura-core`, папка `aura-v1/`, рабочая ветка `feature/aura-v1-m0-realtime-roundtrip`.
+- На стендовом Pi: сервис Aura v1 (агент Yandex Realtime, USB-микрофон, HDMI на телевизор,
+  полудуплекс, сон после 2 минут тишины, переподключение) и канал управления для панели/телефона.
+- На ноутбуке: панель `aura` — проверки, запуск/остановка, живая лента, вопрос текстом.
+  Legacy на время сеанса останавливается и возвращается сама.
+- Legacy Aura 0.1 остаётся включённым сервисом на Pi; автозапуска Aura v1 нет.
+- Живой голосовой тест владельцем — впереди.
