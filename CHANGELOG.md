@@ -8,6 +8,19 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Added (Aura v1 — rule "one Aura", link robustness, activation options — 2026-09-23)
+
+- Project rule "one Aura, no substitutes": only Aura v1 with the Owner's agent on the Pi; no automatic
+  switching to other assistants, models or versions; Legacy only via a manual emergency command.
+- `wayaura-core` `aura-v1/`: owner's-agent-only session (no model fallback, clear error when the agent
+  is not found), panel link robustness (host-key identity, address discovery, reconnects, hard
+  timeouts), leaving the panel stops Aura v1 only; `docs/NETWORK.md`, `docs/ACTIVATION.md`.
+- Stand network: the laptop↔Pi drop-outs traced to Wi-Fi power save on the Pi (phone hotspot); the
+  Owner approved disabling it permanently on the Pi.
+- Activation decision prepared (not implemented): push-to-talk by default with a follow-up window;
+  local wake word as a second mode (Vosk prototype first, openWakeWord if needed).
+
+
 ### Added (Aura v1 — new cycle foundation — 2026-09-23)
 
 - New development cycle **Aura v1** on a saved Yandex AI Studio voice agent. Legacy Aura 0.1 and

@@ -23,6 +23,12 @@ as they are, may be reused where they solved a problem well, and are not
 binding rules or architecture for Aura v1. The Owner/Search/Computer
 governance and red zones below are likewise reference only for this cycle.
 
+**Project rule — one Aura, no substitutes (Owner decision, 2026-09-23).** Only Aura v1 runs on
+the Pi, and only with the Owner's agent in Yandex AI Studio. No automatic switching to other
+assistants, models or versions; if Aura v1 has a problem, it is fixed, not replaced. Legacy Aura is
+to be stopped and disabled on the Pi (files and unit kept as they are); a manual emergency command
+(`aura restore`) is the only way to start it again.
+
 What is true for Aura v1 right now:
 
 - Code lives in `wayaura-core` under `aura-v1/` on branch
@@ -39,8 +45,14 @@ What is true for Aura v1 right now:
   feed, text questions, stopping a reply. Aura v1 runs only during a panel
   session as a transient unit; Legacy Aura is stopped for the session and
   returns automatically when v1 stops (verified on hardware).
-- Legacy Aura 0.1 remains the enabled service on the Pi. No autostart for
-  Aura v1 yet (Owner decision).
+- No autostart for Aura v1 yet (Owner decision: after the live test and the
+  activation decision). Stopping and disabling Legacy Aura on the Pi is part of
+  the current stage (see CHANGELOG for its execution status).
+- Aura v1 connects only to the Owner's agent: an unknown agent ID stops it with
+  a clear error (verified), no fallback model; the panel shows that the Owner's
+  agent answers (model, voice, fingerprint of the agent instructions, never the ID).
+- The laptop panel recognises the Pi by its SSH host key, finds it at a new
+  address, reports a lost link in plain words and reconnects by itself.
 - Unpushed New Aura work found on the Pi was saved to GitHub from a laptop
   backup: `feature/continuous-realtime-runner` and
   `backup/pi-state-20260923`.

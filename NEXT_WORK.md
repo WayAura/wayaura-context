@@ -13,10 +13,14 @@ experience; the Legacy directions below are paused, not deleted.
 
 Next steps, in order:
 
-1. **Live voice test on the stand by the Owner** with the laptop panel (`aura`): speech into
-   the USB microphone, reply from the TV, stop key, exit, Legacy returns.
-2. By its results, the Owner chooses the next stage: Aura v1 autostart instead of Legacy on the
-   Pi, or the phone as the voice source and remote (same control protocol).
+1. **Stand network:** Wi-Fi power save off on the Pi (approved), then Legacy stopped and disabled
+   under the rule "one Aura", Aura v1 on the Pi updated to the latest commit.
+2. **Live voice test on the stand by the Owner** with the laptop panel (`aura`): the Owner's agent
+   answers, speech into the USB microphone, reply from the TV, stop key, exit (Aura v1 stops,
+   nothing else starts).
+3. **Decisions:** activation mode (`aura-v1/docs/ACTIVATION.md`; recommended push-to-talk + follow-up
+   window, wake word as a second mode) and the agent's model; then Aura v1 as the permanent
+   service on the Pi.
 3. Later (not scoped): OBD2 adapter over Bluetooth, car speakers, car installation, wake-word.
 
 Not now: Bluetooth, OBD2, phone, wake-word, systemd autostart, car installation.

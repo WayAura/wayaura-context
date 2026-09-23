@@ -9,15 +9,23 @@
   Lifted later by echo cancellation or the phone microphone.
 - **No wake-word.** Aura v1 answers any speech near the microphone, including room conversation
   and TV sound (observed on the stand). Accepted for the stand by the Owner; idle sleep after
-  120 s of silence limits cloud streaming.
-- **Stand Pi drops off the network.** Twice on 2026-09-23 the Pi stopped answering SSH/ping for
-  several minutes without rebooting (Wi-Fi). Affects development and Aura v1 (reconnects).
+  120 s of silence limits cloud streaming. Options and recommendation prepared in
+  `aura-v1/docs/ACTIVATION.md`; to be decided before a permanent service.
+- **Stand Pi drops off the network.** Cause found: Wi-Fi power save on the Pi (default on) on the
+  phone hotspot — the Pi stays associated but stops answering, even ARP, for minutes. One earlier
+  drop (20:17–20:59) was Wi-Fi switched off by hand. Fix approved by the Owner: power save off for
+  the hotspot connection on the Pi (`aura-v1/docs/NETWORK.md`); the laptop panel now finds the Pi by
+  its host key and reconnects by itself. Status: fix pending on the Pi.
+- **Which model the Owner's agent runs on.** The API requires a model in the connection URL; both
+  `speech-realtime-250923` and `speech-realtime-260528` load the same agent, but answers differ in
+  length. Aura v1 uses one configured model (250923, all tests so far); the Owner should confirm the
+  model set for the agent in AI Studio.
 - **Cost per hour not verified** against the official tariff (the AI Studio pricing page was not
   reachable for automation). Traffic is measured by design: ≈ 170 MB/hour of continuous listening.
 - **Key hygiene.** The Aura v1 API key passed through a chat and should be rotated (Owner, planned).
   A plaintext key file sits in the Pi home directory; left untouched by Owner decision.
-- **No autostart for Aura v1.** It runs only during a laptop panel session; Legacy Aura 0.1
-  stays the enabled service. By Owner decision for this stage.
+- **No autostart for Aura v1.** It runs only during a laptop panel session (Owner decision until the
+  live test and the activation decision).
 
 ### Legacy Aura 0.1
 
