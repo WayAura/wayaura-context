@@ -1,3 +1,5 @@
+> Документ эпохи Legacy Aura, сохранён как история. Действующие правила — [AURA_V1_RULES.md](AURA_V1_RULES.md).
+
 # SEARCH_HANDOVER
 
 This document is the operational handover for the Search role. It is

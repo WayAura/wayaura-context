@@ -1,3 +1,5 @@
+> Документ эпохи Legacy Aura, сохранён как история. Действующие правила — [AURA_V1_RULES.md](AURA_V1_RULES.md).
+
 # WayAura Developer Onboarding
 
 This document is the entry path for any new operator joining WayAura —

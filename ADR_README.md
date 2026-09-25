@@ -1,3 +1,5 @@
+> Документ эпохи Legacy Aura, сохранён как история. Действующие правила — [AURA_V1_RULES.md](AURA_V1_RULES.md).
+
 # ADR Notes
 
 WayAura uses Architecture Decision Records for durable project decisions that should not be repeatedly rediscovered in chat.
