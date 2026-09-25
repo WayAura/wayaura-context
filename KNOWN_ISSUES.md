@@ -4,30 +4,26 @@
 
 ### Aura v1 (from 2026-09-23)
 
-- **Half-duplex.** While Aura v1 thinks or speaks, microphone audio is not sent (echo guard for
-  the TV speakers), so the user cannot interrupt her by voice — only with the panel's stop key.
+- **Half-duplex.** While Aura v1 thinks or speaks the microphone is closed (echo from the TV must not
+  reach the VAD), so she cannot be interrupted by voice — only by a press (s interrupts and listens) or x.
   Lifted later by echo cancellation or the phone microphone.
-- **No wake-word.** Aura v1 answers any speech near the microphone, including room conversation
-  and TV sound (observed on the stand). Accepted for the stand by the Owner; idle sleep after
-  120 s of silence limits cloud streaming. Options and recommendation prepared in
-  `aura-v1/docs/ACTIVATION.md`; to be decided before a permanent service.
-- **Stand Pi drops off the network.** Cause found: Wi-Fi power save on the Pi (default on) on the
-  phone hotspot — the Pi stays associated but stops answering, even ARP, for minutes. One earlier
-  drop (20:17–20:59) was Wi-Fi switched off by hand. Fix approved by the Owner: power save off for
-  the hotspot connection on the Pi (`aura-v1/docs/NETWORK.md`); the laptop panel now finds the Pi by
-  its host key and reconnects by itself. Status: **resolved 2026-09-25** — power save off, persists
-  after reboot; discovery and reconnect verified on hardware. Note: this hotspot blocks outgoing SSH
-  from the Pi to github.com, so code is delivered to the Pi from the laptop (`aura deploy`).
-- **Model of the Owner's agent.** Resolved 2026-09-25: the agent is set to
-  `speech-realtime-260528`; Aura v1 uses only it. Measured on the Pi, it answers ≈ 0.25–0.4 s later
-  than 250923 with the same agent (≈ 0.6–0.7 s after the end of speech as detected by VAD, plus the
-  0.8 s VAD pause) — see `aura-v1/FINDINGS.md`.
-- **Cost per hour not verified** against the official tariff (the AI Studio pricing page was not
-  reachable for automation). Traffic is measured by design: ≈ 170 MB/hour of continuous listening.
+- **No wake word yet.** Push-to-talk is the default; hands-free cabin use needs the wake word stage
+  (`aura-v1/docs/ACTIVATION.md`). In the stand room there are outside sounds up to −10…−25 dBFS, which is
+  why "always listening" is debugging only.
+- **Search-based answers are slower.** Weather and internet search add the Yandex search time: the reply
+  starts ≈ 3.4–5.6 s after a text question (time and vehicle questions ≈ 1.3–2.3 s).
+- **Model 260528 is slower than 250923** with the same agent (≈ 0.25–0.4 s later); kept by Owner decision
+  (it is the agent's model). Built-in `web_search` of the Yandex examples does not work on it; own
+  search tool used instead.
+- **Agent instructions (Owner's area).** The agent's instructions tell it to always start with a fixed
+  greeting; with tools it sometimes prefixes answers with it. Changes to the agent are made by the Owner in
+  AI Studio only.
+- **Cost per hour not verified** against the official tariff; traffic is small with push-to-talk
+  (≈ 0.25–0.5 MB per question).
 - **Key hygiene.** The Aura v1 API key passed through a chat and should be rotated (Owner, planned).
   A plaintext key file sits in the Pi home directory; left untouched by Owner decision.
-- **No autostart for Aura v1.** It runs only during a laptop panel session (Owner decision until the
-  live test and the activation decision).
+- Resolved: stand Pi drop-outs (Wi-Fi power save, off since 2026-09-25); voice "not working" on the first
+  live test (interface feedback, fixed by push-to-talk); Legacy returning on panel exit (removed).
 
 ### Legacy Aura 0.1
 

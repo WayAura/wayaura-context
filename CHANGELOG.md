@@ -8,6 +8,17 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Added (Aura v1 — rules, voice by press, tools, permanent service — 2026-09-25)
+
+- `AURA_V1_RULES.md`: current project rules and the log of the Owner's decisions; `START_HERE.md` enters
+  the Aura v1 era; Legacy-era rule documents carry a banner (kept as history).
+- `wayaura-core` `aura-v1/`: push-to-talk with a follow-up window and clear microphone feedback; tools of
+  the Owner's agent (time, weather, search, vehicle stub); permanent `aura-v1.service` with autostart;
+  acoustic loop and tools checks. Details in `aura-v1/FINDINGS.md`.
+- `CURRENT_STATE`, `KNOWN_ISSUES`, `NEXT_WORK`: Aura v1 layer rewritten to the current state.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_003_VOICE_TOOLS_SERVICE.md`.
+
+
 ### Updated (Aura v1 — verified on the Pi — 2026-09-25)
 
 - Stand network: Wi-Fi power save on the Pi switched off by the Owner; verified to persist after reboot.

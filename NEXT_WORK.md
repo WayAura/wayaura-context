@@ -7,23 +7,19 @@ work moves.
 
 ## Current practical direction — Aura v1 (from 2026-09-23)
 
-The front of work is **Aura v1** in `wayaura-core` `aura-v1/` (branch
-`feature/aura-v1-m0-realtime-roundtrip`). Legacy Aura 0.1 and New Aura are history and
-experience; the Legacy directions below are paused, not deleted.
+Rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Code: `wayaura-core` `aura-v1/` (branch
+`feature/aura-v1-m0-realtime-roundtrip`). Legacy directions below are paused, not deleted.
 
 Next steps, in order:
 
-1. Done 2026-09-25: stand network fixed (Wi-Fi power save off on the Pi), Legacy stopped and
-   disabled under the rule "one Aura", Aura v1 on the Pi on the Owner's agent model 260528.
-2. **Live voice test on the stand by the Owner** with the laptop panel (`aura`): the Owner's agent
-   answers, speech into the USB microphone, reply from the TV, stop key, exit (Aura v1 stops,
-   nothing else starts).
-3. **Activation stage** (direction accepted by the Owner, after the live test): push-to-talk by
-   default + 6–8 s follow-up window; wake word "Аура" on the Pi as a second mode (Vosk first,
-   openWakeWord if needed). Then Aura v1 as the permanent service on the Pi.
-3. Later (not scoped): OBD2 adapter over Bluetooth, car speakers, car installation, wake-word.
-
-Not now: Bluetooth, OBD2, phone, wake-word, systemd autostart, car installation.
+1. **Owner's final voice test** on the stand with the panel (`aura`): press s, ask by voice (time,
+   weather, a search question, the car), follow-up without a press, stop a reply with x, leave the panel.
+2. **Merge decision** for `wayaura-context` `docs/aura-v1-foundation` and the `wayaura-core` working
+   branch (Owner).
+3. **Wake word stage** (Owner's direction): "Аура" on the Pi as a second mode — Vosk prototype first with
+   false-accept measurements on the stand and on car-noise recordings; openWakeWord if needed.
+4. Later (not scoped): phone app as remote and microphone over the same control protocol, OBD2 adapter
+   over Bluetooth, car speakers and installation.
 
 ## Legacy Aura 0.1 — paused direction (before 2026-09-23)
 

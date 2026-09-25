@@ -16,66 +16,40 @@ truth lives in `wayaura-core`.
 
 ## New development cycle: Aura v1 (from 2026-09-23)
 
-The active development cycle is now **Aura v1**, built on a saved Yandex
-AI Studio voice agent (Realtime API). Legacy Aura 0.1 and New Aura (the
-sections below) are the project's history and experience: they are kept
-as they are, may be reused where they solved a problem well, and are not
-binding rules or architecture for Aura v1. The Owner/Search/Computer
-governance and red zones below are likewise reference only for this cycle.
+The active development cycle is **Aura v1**, built on the Owner's saved Yandex AI Studio voice agent
+(Realtime API). Current project rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Legacy Aura 0.1 and
+New Aura (the sections below) are the project's history and experience; the Owner/Search/Computer
+governance and red zones below are reference only for this cycle.
 
-**Project rule — one Aura, no substitutes (Owner decision, 2026-09-23).** Only Aura v1 runs on
-the Pi, and only with the Owner's agent in Yandex AI Studio. No automatic switching to other
-assistants, models or versions; if Aura v1 has a problem, it is fixed, not replaced. Legacy Aura is
-stopped and disabled on the Pi (files and unit kept as they are); a manual emergency command
-(`aura restore`) is the only way to start it again.
+What is true for Aura v1 right now (2026-09-25):
 
-What is true for Aura v1 right now:
+- **One Aura, no substitutes.** Only Aura v1 runs on the stand Pi, only with the Owner's agent on its
+  model `speech-realtime-260528`. An unknown agent stops Aura v1 with a clear error; there is no
+  fallback model. Legacy Aura is stopped and disabled (files and unit unchanged); only a manual
+  emergency command starts it.
+- **Permanent service.** `aura-v1.service` starts at boot (restart on failure, at most 5 restarts in
+  5 min) and comes up asleep: the microphone is read only on the Pi, nothing goes to the cloud.
+  Verified after a reboot.
+- **Push-to-talk.** A press (panel key today, phone button later) opens the microphone for one phrase;
+  the server VAD ends it; a 7 s follow-up window follows each reply; no speech after a press is
+  reported with the level the microphone heard. Acoustic loop (Pi plays a phrase through the TV, the USB
+  microphone hears it): 12 of 12, reply ≈ 0.37 s after the end of the phrase (median).
+- **Tools of the Owner's agent:** current time and date, weather and internet search (Yandex search API,
+  same account), vehicle status stub that honestly says the OBD2 adapter is not connected. Verified on
+  the Pi with the Owner's agent unchanged in AI Studio.
+- **Laptop panel** (`aura`): checks, live feed, s = talk, t = text question, x = stop the reply;
+  connects to the running service, leaving the panel does not stop it; finds the Pi by its SSH host key
+  when the hotspot changes addresses; reconnects after link loss.
+- **Stand network:** Pi drop-outs were Wi-Fi power save on the Pi; switched off by the Owner.
+- Code: `wayaura-core` `aura-v1/`, branch `feature/aura-v1-m0-realtime-roundtrip`, not merged into
+  `main`. Facts and measurements: `aura-v1/FINDINGS.md`. Checkpoints: `MIGRATION_CHECKPOINTS/AURA_V1_*`.
+- Owner's final voice test with push-to-talk: pending.
 
-- Code lives in `wayaura-core` under `aura-v1/` on branch
-  `feature/aura-v1-m0-realtime-roundtrip`; not merged into `main`.
-- Milestone 0 facts about the Realtime API are recorded in
-  `aura-v1/FINDINGS.md` in `wayaura-core` (agent by ID, 16/24/44.1 kHz,
-  no 48 kHz, server VAD stable, manual mode unreliable,
-  `input_audio_buffer.clear` unsupported, cancel only before audio).
-- Foundation on the stand Raspberry Pi: a voice service with replaceable
-  audio source/sink (today USB mic + HDMI TV), half-duplex echo guard,
-  idle sleep, reconnects, and a WebSocket + JSON control channel meant for
-  the laptop panel now and the phone app later.
-- Laptop control panel (`aura` command): checks, start/stop, live event
-  feed, text questions, stopping a reply. Aura v1 runs only during a panel
-  session as a transient unit; leaving the panel stops Aura v1 only (the
-  automatic return of Legacy from the first iteration was removed by the
-  rule "one Aura").
-- No autostart for Aura v1 yet (Owner decision: after the live test and the
-  activation decision).
-- Legacy Aura on the Pi is stopped and disabled (2026-09-25): it did not start
-  after a reboot; its files and unit are unchanged.
-- The Owner's agent runs on `speech-realtime-260528` (the model set for the
-  agent in AI Studio) — one value in code, no fallback.
-- Stand network fixed: the Pi drop-outs were Wi-Fi power save on the Pi; it is
-  off now and stays off after reboot.
-- Aura v1 connects only to the Owner's agent: an unknown agent ID stops it with
-  a clear error (verified), no fallback model; the panel shows that the Owner's
-  agent answers (model, voice, fingerprint of the agent instructions, never the ID).
-- The laptop panel recognises the Pi by its SSH host key, finds it at a new
-  address, reports a lost link in plain words and reconnects by itself.
-- Unpushed New Aura work found on the Pi was saved to GitHub from a laptop
-  backup: `feature/continuous-realtime-runner` and
-  `backup/pi-state-20260923`.
-- Verified on the Pi hardware (2026-09-25): the Owner's agent answers (model
-  260528), an unknown agent ID stops Aura v1 with a clear error, the panel finds
-  the Pi after a hotspot address change and reconnects after link loss, leaving
-  the panel stops only Aura v1, full synthetic loop (voice, text, stop reply).
-- Live voice test by the Owner on the stand: pending.
-- Checkpoint: [`MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md`](MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md).
-- Checkpoint: [`MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md`](MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md).
-
-Target picture (not implemented): the Pi is Aura's brain and voice in a
-protected enclosure in the car, powered from the car battery, sound through
-the car speakers; an own OBD2 adapter connects over Bluetooth to both the
-Pi and the phone; the phone app is the main remote and the primary
-microphone (cabin microphones are the fallback); Aura voices vehicle data
-on command. SSH and the laptop are a development channel only.
+Target picture (not implemented): the Pi is Aura's brain and voice in a protected enclosure in the car,
+powered from the car battery, sound through the car speakers; an own OBD2 adapter connects over
+Bluetooth to both the Pi and the phone; the phone app is the main remote and the primary microphone
+(cabin microphones are the fallback, with a wake word); Aura voices vehicle data on command. SSH and the
+laptop are a development channel only.
 
 ## What is true right now
 
@@ -308,16 +282,11 @@ here.
 - `docs/SELF_HEALING.md` — self-healing логика, примеры логов
 - `docs/AUDIO.md` — карта профилей
 
-## Aura v1 — краткий срез (на 2026-09-23)
+## Aura v1 — краткий срез (на 2026-09-25)
 
-- Новый цикл разработки. Legacy Aura 0.1 и New Aura — история и опыт, не трогаются.
-- Код: `wayaura-core`, папка `aura-v1/`, рабочая ветка `feature/aura-v1-m0-realtime-roundtrip`.
-- На стендовом Pi: сервис Aura v1 (агент Yandex Realtime, USB-микрофон, HDMI на телевизор,
-  полудуплекс, сон после 2 минут тишины, переподключение) и канал управления для панели/телефона.
-- На ноутбуке: панель `aura` — проверки, запуск/остановка, живая лента, вопрос текстом.
-  Legacy на время сеанса останавливается и возвращается сама.
-- Правило «одна Аура, без подмен»: на Pi только Aura v1 с агентом владельца (модель
-  speech-realtime-260528). Legacy остановлена и отключена (2026-09-25), файлы не тронуты.
-- Автозапуска Aura v1 пока нет (после живого теста и решения по активации).
-- Пропадания Pi на стенде — энергосбережение Wi-Fi на Pi; выключено, переживает перезагрузку.
-- Живой голосовой тест владельцем — впереди.
+- Текущая эпоха — Aura v1; правила — `AURA_V1_RULES.md`. Legacy Aura 0.1 и New Aura — история.
+- На Pi постоянный сервис `aura-v1` с агентом владельца (модель speech-realtime-260528): автозапуск,
+  после загрузки спит, звук в облако только после нажатия. Legacy остановлена и отключена.
+- Голос «по нажатию» + 7 с на уточнение; инструменты: время, погода, поиск, «диагностер не подключён».
+- Панель `aura` на ноутбуке: проверки, лента, s — говорить, t — вопрос текстом; выход сервис не останавливает.
+- Впереди: финальная голосовая проверка владельцем, затем слово-активация и телефон.
