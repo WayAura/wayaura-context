@@ -8,6 +8,22 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Updated (Aura v1 — stage 2, foundation `aura-v1.0` — 2026-09-25)
+
+- `wayaura-core` `aura-v1`: leaving the panel only disconnects it (Aura stays asleep and ready); a
+  re-plugged microphone is picked up again; weather ≈ 1–1.6 s after the phrase (prefetch on press, cache,
+  short query); `aura log` (read-only journal); stand tuning tools (software gain, VAD threshold, quiet
+  loopback). Merged into `main`, tag `aura-v1.0`; rollback commands in `aura-v1/docs/PI_MIGRATION.md`.
+- Microphone sensitivity investigated: the stand's USB adapter with its microphone applies its own voice
+  processing, ordinary speech from 1–1.5 m is 20–25 dB short (hardware); kept by Owner decision.
+- `AURA_V1_RULES.md` §9: new Owner decisions (panel exit, microphone, laptop VPN, `aura-v1.0`).
+- `CURRENT_STATE`, `NEXT_WORK`, `KNOWN_ISSUES`, `HANDOFF_AURA_V1` rewritten to the current state;
+  `aura-v1/docs/DIAGNOSTICS.md` (read-only state and journal, PowerShell 5.1 quoting workaround),
+  VPN section in `aura-v1/docs/NETWORK.md`.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_004_FOUNDATION_V1_0.md`. Branch `docs/aura-v1-foundation`
+  merged into `main`.
+
+
 ### Added (Aura v1 — rules, voice by press, tools, permanent service — 2026-09-25)
 
 - `AURA_V1_RULES.md`: current project rules and the log of the Owner's decisions; `START_HERE.md` enters

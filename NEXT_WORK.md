@@ -7,17 +7,19 @@ work moves.
 
 ## Current practical direction — Aura v1 (from 2026-09-23)
 
-Rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Code: `wayaura-core` `aura-v1/` (branch
-`feature/aura-v1-m0-realtime-roundtrip`). Legacy directions below are paused, not deleted.
+Rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Code: `wayaura-core` `aura-v1/`, `main`, foundation tag
+`aura-v1.0`; new work in new branches from `main`. Legacy directions below are paused, not deleted.
 
 Next steps, in order:
 
-1. **Owner's final voice test** on the stand with the panel (`aura`): press s, ask by voice (time,
-   weather, a search question, the car), follow-up without a press, stop a reply with x, leave the panel.
-2. **Merge decision** for `wayaura-context` `docs/aura-v1-foundation` and the `wayaura-core` working
-   branch (Owner).
-3. **Wake word stage** (Owner's direction): "Аура" on the Pi as a second mode — Vosk prototype first with
-   false-accept measurements on the stand and on car-noise recordings; openWakeWord if needed.
+1. **Wake word stage** (Owner's direction): "Аура" on the Pi as a second activation mode, switched on
+   and off from the panel, off by default — Vosk first, openWakeWord if needed; measure false accepts
+   (TV, conversation), misses and delay. Work in its own branch; merge only when reliable.
+2. **Greeting** (Owner, in AI Studio): replace the agent's "always say at the very beginning …" line with
+   the prepared text so the greeting is not said before answers (text in the stage report / HANDOFF).
+3. **Microphone** (Owner's decision pending): the stand microphone hears ordinary speech only up close
+   (hardware). Options: a far-field USB microphone without its own voice processing; or wait for the
+   phone as the main microphone. Tools for tuning a new microphone are ready (`tools/loopback.py`).
 4. Later (not scoped): phone app as remote and microphone over the same control protocol, OBD2 adapter
    over Bluetooth, car speakers and installation.
 

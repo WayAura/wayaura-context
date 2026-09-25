@@ -21,7 +21,7 @@ The active development cycle is **Aura v1**, built on the Owner's saved Yandex A
 New Aura (the sections below) are the project's history and experience; the Owner/Search/Computer
 governance and red zones below are reference only for this cycle.
 
-What is true for Aura v1 right now (2026-09-25):
+What is true for Aura v1 right now (2026-09-25, version `aura-v1.0`):
 
 - **One Aura, no substitutes.** Only Aura v1 runs on the stand Pi, only with the Owner's agent on its
   model `speech-realtime-260528`. An unknown agent stops Aura v1 with a clear error; there is no
@@ -38,12 +38,25 @@ What is true for Aura v1 right now (2026-09-25):
   same account), vehicle status stub that honestly says the OBD2 adapter is not connected. Verified on
   the Pi with the Owner's agent unchanged in AI Studio.
 - **Laptop panel** (`aura`): checks, live feed, s = talk, t = text question, x = stop the reply;
-  connects to the running service, leaving the panel does not stop it; finds the Pi by its SSH host key
-  when the hotspot changes addresses; reconnects after link loss.
+  connects to the running service; leaving the panel only disconnects it — Aura keeps running and falls
+  asleep by herself (verified on the Pi); only `aura stop` stops her. `aura log` shows the service state
+  and journal read-only. Finds the Pi by its SSH host key when the hotspot changes addresses; reconnects
+  after link loss.
+- **Microphone reconnect:** a USB microphone that goes silent for 2 s is treated as unplugged; Aura
+  looks for it every 5 s and comes back asleep (verified with a USB reset on the Pi).
+- **Weather is fast:** short search query, 30-minute cache, the home city's weather is fetched as soon as
+  "talk" is pressed; reply ≈ 1.0–1.6 s after the end of the phrase instead of ≈ 4 s. No new provider.
+- **Stand microphone limit (hardware):** the USB adapter AB13X with its microphone applies its own voice
+  processing; ordinary speech from 1–1.5 m arrives 20–25 dB below what is recognised reliably. Software
+  gain and the VAD threshold do not help (`aura-v1/FINDINGS.md`). Owner's decision: keep it for now; the
+  phone will be the main microphone in the car.
 - **Stand network:** Pi drop-outs were Wi-Fi power save on the Pi; switched off by the Owner.
-- Code: `wayaura-core` `aura-v1/`, branch `feature/aura-v1-m0-realtime-roundtrip`, not merged into
-  `main`. Facts and measurements: `aura-v1/FINDINGS.md`. Checkpoints: `MIGRATION_CHECKPOINTS/AURA_V1_*`.
-- Owner's final voice test with push-to-talk: pending.
+- Code: `wayaura-core` `aura-v1/`, in `main`, tag `aura-v1.0` (rollback commands in
+  `aura-v1/docs/PI_MIGRATION.md`). The Pi runs the tagged version. Facts and measurements:
+  `aura-v1/FINDINGS.md`. Checkpoints: `MIGRATION_CHECKPOINTS/AURA_V1_*`.
+- Owner's voice test (2026-09-25): push-to-talk, follow-up, time, weather, search, OBD2 stub and the
+  permanent service work; found: ordinary voice not heard (hardware, above), slow weather (fixed),
+  a greeting before answers (agent instructions — the Owner's area; replacement text prepared).
 
 Target picture (not implemented): the Pi is Aura's brain and voice in a protected enclosure in the car,
 powered from the car battery, sound through the car speakers; an own OBD2 adapter connects over
@@ -289,4 +302,7 @@ here.
   после загрузки спит, звук в облако только после нажатия. Legacy остановлена и отключена.
 - Голос «по нажатию» + 7 с на уточнение; инструменты: время, погода, поиск, «диагностер не подключён».
 - Панель `aura` на ноутбуке: проверки, лента, s — говорить, t — вопрос текстом; выход сервис не останавливает.
-- Впереди: финальная голосовая проверка владельцем, затем слово-активация и телефон.
+- Выход из панели оставляет Ауру спящей; после переподключения микрофона она поднимается сама; погода —
+  ≈ 1–1,6 с после конца фразы. Обычный голос с 1–1,5 м стендовый микрофон не слышит — ограничение железа.
+- Фундамент — метка `aura-v1.0` в `wayaura-core`, обе ветки влиты в `main`.
+- Впереди: слово-активация «Аура» (отдельная ветка), затем телефон.

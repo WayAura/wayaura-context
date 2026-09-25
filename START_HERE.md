@@ -6,10 +6,12 @@
 
 1. [`AURA_V1_RULES.md`](AURA_V1_RULES.md) — действующие правила: одна Аура без подмен, старые файлы на Pi,
    секреты и идентификаторы (репозиторий публичный), git, когда спрашивать владельца, документация, отчёт.
-2. [`CURRENT_STATE.md`](CURRENT_STATE.md) — раздел «New development cycle: Aura v1» и краткий срез по-русски.
-3. [`NEXT_WORK.md`](NEXT_WORK.md) — ближайшие шаги Aura v1.
-4. Код и техническая документация — `wayaura-core`, папка `aura-v1/` (`README.md`, `FINDINGS.md`, `docs/`).
-5. Чекпоинты этапов — [`MIGRATION_CHECKPOINTS/`](MIGRATION_CHECKPOINTS/) (`AURA_V1_*`).
+2. [`HANDOFF_AURA_V1.md`](HANDOFF_AURA_V1.md) — передача дел: что где лежит (в том числе вне git), грабли, команды.
+3. [`CURRENT_STATE.md`](CURRENT_STATE.md) — раздел «New development cycle: Aura v1» и краткий срез по-русски.
+4. [`NEXT_WORK.md`](NEXT_WORK.md) — ближайшие шаги Aura v1.
+5. Код и техническая документация — `wayaura-core`, папка `aura-v1/` (`README.md`, `FINDINGS.md`, `docs/`);
+   фундамент — метка `aura-v1.0`.
+6. Чекпоинты этапов — [`MIGRATION_CHECKPOINTS/`](MIGRATION_CHECKPOINTS/) (`AURA_V1_*`).
 
 Всё, что ниже, — вход эпохи Legacy Aura / New Aura. Сохранено как история: роли Search/Computer,
 «красные зоны» и порядок чтения той эпохи для Aura v1 не обязательны; при расхождении действует
