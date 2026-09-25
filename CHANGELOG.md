@@ -19,6 +19,8 @@ to that release and a new Unreleased section is started above it.
 - `wayaura-core` `aura-v1`: code delivered to the Pi from the laptop over SSH (`aura deploy`), since
   the hotspot blocks SSH from the Pi to GitHub.
 - Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md`.
+- Panel fix: a dropped link during the startup checks was shown as "Aura v1 not installed"; link
+  failures are now retried and reported as "no answer from the Pi" (found by the Owner).
 
 
 ### Added (Aura v1 — rule "one Aura", link robustness, activation options — 2026-09-23)
