@@ -15,11 +15,13 @@
   phone hotspot — the Pi stays associated but stops answering, even ARP, for minutes. One earlier
   drop (20:17–20:59) was Wi-Fi switched off by hand. Fix approved by the Owner: power save off for
   the hotspot connection on the Pi (`aura-v1/docs/NETWORK.md`); the laptop panel now finds the Pi by
-  its host key and reconnects by itself. Status: fix pending on the Pi.
-- **Which model the Owner's agent runs on.** The API requires a model in the connection URL; both
-  `speech-realtime-250923` and `speech-realtime-260528` load the same agent, but answers differ in
-  length. Aura v1 uses one configured model (250923, all tests so far); the Owner should confirm the
-  model set for the agent in AI Studio.
+  its host key and reconnects by itself. Status: **resolved 2026-09-25** — power save off, persists
+  after reboot; discovery and reconnect verified on hardware. Note: this hotspot blocks outgoing SSH
+  from the Pi to github.com, so code is delivered to the Pi from the laptop (`aura deploy`).
+- **Model of the Owner's agent.** Resolved 2026-09-25: the agent is set to
+  `speech-realtime-260528`; Aura v1 uses only it. Measured on the Pi, it answers ≈ 0.25–0.4 s later
+  than 250923 with the same agent (≈ 0.6–0.7 s after the end of speech as detected by VAD, plus the
+  0.8 s VAD pause) — see `aura-v1/FINDINGS.md`.
 - **Cost per hour not verified** against the official tariff (the AI Studio pricing page was not
   reachable for automation). Traffic is measured by design: ≈ 170 MB/hour of continuous listening.
 - **Key hygiene.** The Aura v1 API key passed through a chat and should be rotated (Owner, planned).

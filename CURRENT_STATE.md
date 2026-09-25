@@ -46,8 +46,13 @@ What is true for Aura v1 right now:
   session as a transient unit; Legacy Aura is stopped for the session and
   returns automatically when v1 stops (verified on hardware).
 - No autostart for Aura v1 yet (Owner decision: after the live test and the
-  activation decision). Stopping and disabling Legacy Aura on the Pi is part of
-  the current stage (see CHANGELOG for its execution status).
+  activation decision).
+- Legacy Aura on the Pi is stopped and disabled (2026-09-25): it did not start
+  after a reboot; its files and unit are unchanged.
+- The Owner's agent runs on `speech-realtime-260528` (the model set for the
+  agent in AI Studio) — one value in code, no fallback.
+- Stand network fixed: the Pi drop-outs were Wi-Fi power save on the Pi; it is
+  off now and stays off after reboot.
 - Aura v1 connects only to the Owner's agent: an unknown agent ID stops it with
   a clear error (verified), no fallback model; the panel shows that the Owner's
   agent answers (model, voice, fingerprint of the agent instructions, never the ID).
@@ -56,7 +61,12 @@ What is true for Aura v1 right now:
 - Unpushed New Aura work found on the Pi was saved to GitHub from a laptop
   backup: `feature/continuous-realtime-runner` and
   `backup/pi-state-20260923`.
+- Verified on the Pi hardware (2026-09-25): the Owner's agent answers (model
+  260528), an unknown agent ID stops Aura v1 with a clear error, the panel finds
+  the Pi after a hotspot address change and reconnects after link loss, leaving
+  the panel stops only Aura v1, full synthetic loop (voice, text, stop reply).
 - Live voice test by the Owner on the stand: pending.
+- Checkpoint: [`MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md`](MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md).
 - Checkpoint: [`MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md`](MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md).
 
 Target picture (not implemented): the Pi is Aura's brain and voice in a
@@ -305,5 +315,8 @@ here.
   полудуплекс, сон после 2 минут тишины, переподключение) и канал управления для панели/телефона.
 - На ноутбуке: панель `aura` — проверки, запуск/остановка, живая лента, вопрос текстом.
   Legacy на время сеанса останавливается и возвращается сама.
-- Legacy Aura 0.1 остаётся включённым сервисом на Pi; автозапуска Aura v1 нет.
+- Правило «одна Аура, без подмен»: на Pi только Aura v1 с агентом владельца (модель
+  speech-realtime-260528). Legacy остановлена и отключена (2026-09-25), файлы не тронуты.
+- Автозапуска Aura v1 пока нет (после живого теста и решения по активации).
+- Пропадания Pi на стенде — энергосбережение Wi-Fi на Pi; выключено, переживает перезагрузку.
 - Живой голосовой тест владельцем — впереди.

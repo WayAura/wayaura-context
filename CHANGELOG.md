@@ -8,6 +8,19 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Updated (Aura v1 — verified on the Pi — 2026-09-25)
+
+- Stand network: Wi-Fi power save on the Pi switched off by the Owner; verified to persist after reboot.
+  The panel found the Pi after a hotspot subnet change and reconnected after a link loss.
+- Legacy Aura stopped and disabled on the Pi under the rule "one Aura" (files and unit unchanged); it
+  does not start after reboot.
+- The Owner's agent model `speech-realtime-260528` fixed as the only model; compared on the Pi with
+  250923 (`aura-v1/FINDINGS.md`).
+- `wayaura-core` `aura-v1`: code delivered to the Pi from the laptop over SSH (`aura deploy`), since
+  the hotspot blocks SSH from the Pi to GitHub.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md`.
+
+
 ### Added (Aura v1 — rule "one Aura", link robustness, activation options — 2026-09-23)
 
 - Project rule "one Aura, no substitutes": only Aura v1 with the Owner's agent on the Pi; no automatic
