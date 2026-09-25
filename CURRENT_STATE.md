@@ -26,7 +26,7 @@ governance and red zones below are likewise reference only for this cycle.
 **Project rule — one Aura, no substitutes (Owner decision, 2026-09-23).** Only Aura v1 runs on
 the Pi, and only with the Owner's agent in Yandex AI Studio. No automatic switching to other
 assistants, models or versions; if Aura v1 has a problem, it is fixed, not replaced. Legacy Aura is
-to be stopped and disabled on the Pi (files and unit kept as they are); a manual emergency command
+stopped and disabled on the Pi (files and unit kept as they are); a manual emergency command
 (`aura restore`) is the only way to start it again.
 
 What is true for Aura v1 right now:
@@ -43,8 +43,9 @@ What is true for Aura v1 right now:
   the laptop panel now and the phone app later.
 - Laptop control panel (`aura` command): checks, start/stop, live event
   feed, text questions, stopping a reply. Aura v1 runs only during a panel
-  session as a transient unit; Legacy Aura is stopped for the session and
-  returns automatically when v1 stops (verified on hardware).
+  session as a transient unit; leaving the panel stops Aura v1 only (the
+  automatic return of Legacy from the first iteration was removed by the
+  rule "one Aura").
 - No autostart for Aura v1 yet (Owner decision: after the live test and the
   activation decision).
 - Legacy Aura on the Pi is stopped and disabled (2026-09-25): it did not start
