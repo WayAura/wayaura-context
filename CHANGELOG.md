@@ -8,6 +8,79 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Updated (Aura v1 — stage 2, foundation `aura-v1.0` — 2026-09-25)
+
+- `wayaura-core` `aura-v1`: leaving the panel only disconnects it (Aura stays asleep and ready); a
+  re-plugged microphone is picked up again; weather ≈ 1–1.6 s after the phrase (prefetch on press, cache,
+  short query); `aura log` (read-only journal); stand tuning tools (software gain, VAD threshold, quiet
+  loopback). Merged into `main`, tag `aura-v1.0`; rollback commands in `aura-v1/docs/PI_MIGRATION.md`.
+- Microphone sensitivity investigated: the stand's USB adapter with its microphone applies its own voice
+  processing, ordinary speech from 1–1.5 m is 20–25 dB short (hardware); kept by Owner decision.
+- Fixed after a reboot of the stand (2026-09-26): the HDMI output appearing after the service start
+  left Aura unable to answer; the output is now waited for like the microphone.
+- `AURA_V1_RULES.md` §9: new Owner decisions (panel exit, microphone, laptop VPN, `aura-v1.0`).
+- `CURRENT_STATE`, `NEXT_WORK`, `KNOWN_ISSUES`, `HANDOFF_AURA_V1` rewritten to the current state;
+  `aura-v1/docs/DIAGNOSTICS.md` (read-only state and journal, PowerShell 5.1 quoting workaround),
+  VPN section in `aura-v1/docs/NETWORK.md`.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_004_FOUNDATION_V1_0.md`. Branch `docs/aura-v1-foundation`
+  merged into `main`.
+
+
+### Added (Aura v1 — rules, voice by press, tools, permanent service — 2026-09-25)
+
+- `AURA_V1_RULES.md`: current project rules and the log of the Owner's decisions; `START_HERE.md` enters
+  the Aura v1 era; Legacy-era rule documents carry a banner (kept as history).
+- `wayaura-core` `aura-v1/`: push-to-talk with a follow-up window and clear microphone feedback; tools of
+  the Owner's agent (time, weather, search, vehicle stub); permanent `aura-v1.service` with autostart;
+  acoustic loop and tools checks. Details in `aura-v1/FINDINGS.md`.
+- `CURRENT_STATE`, `KNOWN_ISSUES`, `NEXT_WORK`: Aura v1 layer rewritten to the current state.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_003_VOICE_TOOLS_SERVICE.md`.
+
+
+### Updated (Aura v1 — verified on the Pi — 2026-09-25)
+
+- Stand network: Wi-Fi power save on the Pi switched off by the Owner; verified to persist after reboot.
+  The panel found the Pi after a hotspot subnet change and reconnected after a link loss.
+- Legacy Aura stopped and disabled on the Pi under the rule "one Aura" (files and unit unchanged); it
+  does not start after reboot.
+- The Owner's agent model `speech-realtime-260528` fixed as the only model; compared on the Pi with
+  250923 (`aura-v1/FINDINGS.md`).
+- `wayaura-core` `aura-v1`: code delivered to the Pi from the laptop over SSH (`aura deploy`), since
+  the hotspot blocks SSH from the Pi to GitHub.
+- Checkpoint `MIGRATION_CHECKPOINTS/AURA_V1_002_ONE_AURA.md`.
+- Panel fix: a dropped link during the startup checks was shown as "Aura v1 not installed"; link
+  failures are now retried and reported as "no answer from the Pi" (found by the Owner).
+
+
+### Added (Aura v1 — rule "one Aura", link robustness, activation options — 2026-09-23)
+
+- Project rule "one Aura, no substitutes": only Aura v1 with the Owner's agent on the Pi; no automatic
+  switching to other assistants, models or versions; Legacy only via a manual emergency command.
+- `wayaura-core` `aura-v1/`: owner's-agent-only session (no model fallback, clear error when the agent
+  is not found), panel link robustness (host-key identity, address discovery, reconnects, hard
+  timeouts), leaving the panel stops Aura v1 only; `docs/NETWORK.md`, `docs/ACTIVATION.md`.
+- Stand network: the laptop↔Pi drop-outs traced to Wi-Fi power save on the Pi (phone hotspot); the
+  Owner approved disabling it permanently on the Pi.
+- Activation decision prepared (not implemented): push-to-talk by default with a follow-up window;
+  local wake word as a second mode (Vosk prototype first, openWakeWord if needed).
+
+
+### Added (Aura v1 — new cycle foundation — 2026-09-23)
+
+- New development cycle **Aura v1** on a saved Yandex AI Studio voice agent. Legacy Aura 0.1 and
+  New Aura are kept as history and experience; nothing of them was changed.
+- `wayaura-core` (`aura-v1/`, branch `feature/aura-v1-m0-realtime-roundtrip`): Milestone 0
+  Realtime API probe and `FINDINGS.md`; Raspberry Pi inventory, backup and rollback plan
+  (`docs/PI_MIGRATION.md`); voice service with replaceable audio source/sink, control channel
+  (`docs/CONTROL_PROTOCOL.md`), laptop control panel (`aura`), unit tests and a smoke check.
+- `wayaura-core`: unpushed New Aura work from the stand Pi saved from a laptop backup —
+  `feature/continuous-realtime-runner`, `backup/pi-state-20260923`.
+- `CURRENT_STATE.md`: new Aura v1 layer and target picture (Pi + OBD2 + phone); Russian summary.
+- `NEXT_WORK.md`: Aura v1 is the current front; Legacy directions kept as paused.
+- `KNOWN_ISSUES.md`: Aura v1 known issues.
+- `MIGRATION_CHECKPOINTS/AURA_V1_001_FOUNDATION.md`: checkpoint.
+
+
 ### Updated (Autostart single-instance guard + Phase 2A.2 sync — 2026-05-19)
 
 - `CURRENT_STATE.md`: added autostart single-instance guard section

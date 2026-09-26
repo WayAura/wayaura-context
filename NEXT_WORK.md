@@ -5,7 +5,25 @@ This file is the short operational bridge between
 practical move. It is not a roadmap. It is replaced as the front of
 work moves.
 
-## Current practical direction
+## Current practical direction — Aura v1 (from 2026-09-23)
+
+Rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Code: `wayaura-core` `aura-v1/`, `main`, foundation tag
+`aura-v1.0`; new work in new branches from `main`. Legacy directions below are paused, not deleted.
+
+Next steps, in order:
+
+1. **Wake word stage** (Owner's direction): "Аура" on the Pi as a second activation mode, switched on
+   and off from the panel, off by default — Vosk first, openWakeWord if needed; measure false accepts
+   (TV, conversation), misses and delay. Work in its own branch; merge only when reliable.
+2. **Greeting** (Owner, in AI Studio): replace the agent's "always say at the very beginning …" line with
+   the prepared text so the greeting is not said before answers (text in the stage report / HANDOFF).
+3. **Microphone** (Owner's decision pending): the stand microphone hears ordinary speech only up close
+   (hardware). Options: a far-field USB microphone without its own voice processing; or wait for the
+   phone as the main microphone. Tools for tuning a new microphone are ready (`tools/loopback.py`).
+4. Later (not scoped): phone app as remote and microphone over the same control protocol, OBD2 adapter
+   over Bluetooth, car speakers and installation.
+
+## Legacy Aura 0.1 — paused direction (before 2026-09-23)
 
 Audio Policy v2 is complete (`wayaura-core` commit `bc8a3a7`):
 - `usb_mic_hdmi_out` is the first-class default profile for single USB + HDMI

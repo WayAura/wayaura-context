@@ -6,6 +6,8 @@ For the mandatory reading order, follow
 [`START_HERE.md`](START_HERE.md). For deciding which repository a
 task belongs to, see [`REPO_MAP.md`](REPO_MAP.md).
 
+**Aura v1 (текущая эпоха):** [`AURA_V1_RULES.md`](AURA_V1_RULES.md) — действующие правила; документы с пометкой «Документ эпохи Legacy Aura» — история.
+
 ## Entry path (read in this order)
 
 1. [`START_HERE.md`](START_HERE.md) — mandatory first read; rules

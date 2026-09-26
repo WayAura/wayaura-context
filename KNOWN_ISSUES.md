@@ -2,6 +2,46 @@
 
 ## Active issues
 
+### Aura v1 (from 2026-09-23)
+
+- **Half-duplex.** While Aura v1 thinks or speaks the microphone is closed (echo from the TV must not
+  reach the VAD), so she cannot be interrupted by voice — only by a press (s interrupts and listens) or x.
+  Lifted later by echo cancellation or the phone microphone.
+- **No wake word yet.** Push-to-talk is the default; hands-free cabin use needs the wake word stage
+  (`aura-v1/docs/ACTIVATION.md`). In the stand room there are outside sounds up to −10…−25 dBFS, which is
+  why "always listening" is debugging only.
+- **Stand microphone hears ordinary speech only up close (hardware).** The USB adapter AB13X with its
+  microphone applies its own voice processing: quiet speech loses its consonants (1.2–8 kHz), ordinary
+  speech from 1–1.5 m arrives ≈ 20–25 dB below the reliable level. Software gain, the VAD threshold and
+  the capture control do not help. Kept by Owner decision; the phone will be the main microphone in the
+  car. Details: `aura-v1/FINDINGS.md`.
+- **Internet search is slow.** Search answers add the Yandex search time (1–8 s). Weather for the home
+  city is prefetched on a press and cached (≈ 1–1.6 s after the phrase); weather for other cities and
+  general search still wait for the search.
+- **Model 260528 is slower than 250923** with the same agent (≈ 0.25–0.4 s later); kept by Owner decision
+  (it is the agent's model). Built-in `web_search` of the Yandex examples does not work on it; own
+  search tool used instead.
+- **Agent instructions (Owner's area).** The agent's instructions tell it to always start with a fixed
+  greeting; every wake-up opens a new session, so the greeting comes before answers. Replacement text is
+  prepared (HANDOFF); changes to the agent are made by the Owner in AI Studio only.
+- **Cost per hour not verified** against the official tariff; traffic is small with push-to-talk
+  (≈ 0.25–0.5 MB per question).
+- **Key hygiene.** The Aura v1 API key passed through a chat and should be rotated (Owner, planned).
+  A plaintext key file sits in the Pi home directory; left untouched by Owner decision.
+- **Stand hotspot link drops** for seconds now and then (SSH timeouts during long work); the panel
+  reconnects by itself. Not the laptop VPN (traffic to the Pi goes directly over Wi-Fi).
+- **Old commits of `wayaura-core` mention the stand's city** in a test question and a test time zone
+  (removed 2026-09-25, history not rewritten; the repository is private).
+- Resolved: stand Pi drop-outs (Wi-Fi power save, off since 2026-09-25); voice "not working" on the first
+  live test (interface feedback, fixed by push-to-talk); Legacy returning on panel exit (removed); leaving
+  the panel stopped Aura (fixed 2026-09-25); a re-plugged microphone left Aura deaf (fixed 2026-09-25);
+  weather ≈ 4–5 s (≈ 1–1.6 s since 2026-09-25); HDMI output missing at boot left every reply stuck in
+  "speaking" (fixed 2026-09-26: the output is waited for and a dead output is detected).
+- **The agent sometimes writes a tool call as text** (`{"get_weather": …}` spoken/printed instead of a real
+  call): 5 of 6 in one laptop test run on 2026-09-26, 0 of 8 on the Pi. Not understood yet; watch it.
+
+### Legacy Aura 0.1
+
 - **AB13X USB Audio: start with adapter already plugged** (`known issue
   / not blocking`). Since Audio Policy v2, the default profile for single
   USB + HDMI is `usb_mic_hdmi_out` (capture=USB, playback=HDMI), which

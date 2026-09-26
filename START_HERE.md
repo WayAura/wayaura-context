@@ -1,5 +1,24 @@
 # START_HERE
 
+## Aura v1 — текущая эпоха проекта (с 2026-09-23)
+
+Если вы агент или новый участник, начните здесь:
+
+1. [`AURA_V1_RULES.md`](AURA_V1_RULES.md) — действующие правила: одна Аура без подмен, старые файлы на Pi,
+   секреты и идентификаторы (репозиторий публичный), git, когда спрашивать владельца, документация, отчёт.
+2. [`HANDOFF_AURA_V1.md`](HANDOFF_AURA_V1.md) — передача дел: что где лежит (в том числе вне git), грабли, команды.
+3. [`CURRENT_STATE.md`](CURRENT_STATE.md) — раздел «New development cycle: Aura v1» и краткий срез по-русски.
+4. [`NEXT_WORK.md`](NEXT_WORK.md) — ближайшие шаги Aura v1.
+5. Код и техническая документация — `wayaura-core`, папка `aura-v1/` (`README.md`, `FINDINGS.md`, `docs/`);
+   фундамент — метка `aura-v1.0`.
+6. Чекпоинты этапов — [`MIGRATION_CHECKPOINTS/`](MIGRATION_CHECKPOINTS/) (`AURA_V1_*`).
+
+Всё, что ниже, — вход эпохи Legacy Aura / New Aura. Сохранено как история: роли Search/Computer,
+«красные зоны» и порядок чтения той эпохи для Aura v1 не обязательны; при расхождении действует
+`AURA_V1_RULES.md`.
+
+---
+
 You are entering the WayAura context repository. Read this file fully before
 doing anything else.
 

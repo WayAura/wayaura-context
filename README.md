@@ -1,5 +1,7 @@
 # WayAura Context Repository
 
+> Текущая эпоха — **Aura v1**: начните с [`START_HERE.md`](START_HERE.md) и [`AURA_V1_RULES.md`](AURA_V1_RULES.md).
+
 This repository is the continuity and documentation layer of WayAura.
 
 It exists so the project can survive account changes, session loss, repository rebuilds, and agent replacement without forcing the owner to re-explain the system from zero.
