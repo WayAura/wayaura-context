@@ -58,11 +58,21 @@ What is true for Aura v1 right now (2026-09-25, version `aura-v1.0`):
   permanent service work; found: ordinary voice not heard (hardware, above), slow weather (fixed),
   a greeting before answers (agent instructions — the Owner's area; replacement text prepared).
 
-Target picture (not implemented): the Pi is Aura's brain and voice in a protected enclosure in the car,
-powered from the car battery, sound through the car speakers; an own OBD2 adapter connects over
-Bluetooth to both the Pi and the phone; the phone app is the main remote and the primary microphone
-(cabin microphones are the fallback, with a wake word); Aura voices vehicle data on command. SSH and the
-laptop are a development channel only.
+Target picture (Owner's decision 2026-09-26; design in `wayaura-core/aura-v1/docs/PHONE_LINK.md`, only
+the voice-over-network part is implemented): Aura (the Pi, powered by the car, sound through the car
+speakers) is the centre; the phone with our app and our own OBD2 adapter connect to it, all three linked
+by Bluetooth. The phone is mandatory — the remote and the main voice input; Aura gets internet over Wi-Fi
+from the phone's hotspot; the adapter gives data to both the phone and Aura. In the car: starting the
+engine powers Aura; the paired phone connects by itself and shares internet; the app listens for the word
+"Аура" on the phone and only then sends the voice to the Pi; the answer comes from the car speakers; 7 s
+for a follow-up. The Pi's own wake word is a fallback for cabin microphones. Main open risk: apps cannot
+switch the hotspot on by themselves (Android/iOS) — options in PHONE_LINK §8, decision pending. SSH and
+the laptop are a development channel only.
+
+Stage 3 (2026-09-26, branch `feature/aura-v1-stage3`, not in `main` yet): voice from a client over the
+control channel (the laptop panel imitates the phone: `m` — laptop microphone, `s` — talk; reply
+≈ 1.3 s after the end of the phrase, same as the Pi microphone), `listen` from the phone's wake word,
+HDMI output reopened once after boot, rollback-to-tag instructions checked and corrected.
 
 ## What is true right now
 
