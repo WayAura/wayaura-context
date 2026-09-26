@@ -10,7 +10,13 @@ work moves.
 Rules: [`AURA_V1_RULES.md`](AURA_V1_RULES.md). Code: `wayaura-core` `aura-v1/`, `main`, foundation tag
 `aura-v1.0`; new work in new branches from `main`. Legacy directions below are paused, not deleted.
 
-Next steps, in order:
+Next steps, in order (updated 2026-09-26):
+
+0. **Stage 3 merge** (Owner): the revert PR `revert/wake-word-from-main` (then tag `aura-v1.0`), and the
+   stage 3 branches of both repositories. **Phone link decisions** (Owner + app team): how the hotspot gets
+   switched on, Android/iOS background listening, the adapter's two connections — `PHONE_LINK.md` §8–11.
+   Next engineering step: Aura listening on the hotspot network with TLS and per-phone tokens, then BLE
+   pairing and provisioning on the Pi.
 
 1. **Wake word stage** (Owner's direction): "Аура" on the Pi as a second activation mode, switched on
    and off from the panel, off by default — Vosk first, openWakeWord if needed; measure false accepts

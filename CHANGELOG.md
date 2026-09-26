@@ -8,6 +8,17 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Added (Aura v1 — stage 3: phone voice, phone link design — 2026-09-26)
+
+- Owner decisions (§9): target architecture (Aura as the hub, phone mandatory, internet from the phone's
+  hotspot, OBD2 to both), the car scenario (wake word on the phone), stand microphone kept, Pi wake word
+  stays in its branch.
+- `wayaura-core` `aura-v1`: remote voice input (phone, imitated by the laptop panel), `docs/PHONE_LINK.md`
+  (design and protocol for the app and adapter teams), findings of the silent loop, weather for other
+  cities, tool call as text; rollback instructions corrected.
+- `CURRENT_STATE` target picture, `KNOWN_ISSUES`, `NEXT_WORK`, `HANDOFF_AURA_V1`.
+
+
 ### Updated (Aura v1 — stage 2, foundation `aura-v1.0` — 2026-09-25)
 
 - `wayaura-core` `aura-v1`: leaving the panel only disconnects it (Aura stays asleep and ready); a

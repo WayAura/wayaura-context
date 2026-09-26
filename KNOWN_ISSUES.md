@@ -37,8 +37,17 @@
   the panel stopped Aura (fixed 2026-09-25); a re-plugged microphone left Aura deaf (fixed 2026-09-25);
   weather ≈ 4–5 s (≈ 1–1.6 s since 2026-09-25); HDMI output missing at boot left every reply stuck in
   "speaking" (fixed 2026-09-26: the output is waited for and a dead output is detected).
-- **The agent sometimes writes a tool call as text** (`{"get_weather": …}` spoken/printed instead of a real
-  call): 5 of 6 in one laptop test run on 2026-09-26, 0 of 8 on the Pi. Not understood yet; watch it.
+- **The stand TV sometimes stays silent** although Aura's HDMI output is open and playing (twice on
+  2026-09-26: once after a reboot, once hours later; not reproduced on demand; the TV did not answer an
+  HDMI-CEC status query). Likely the TV itself (auto standby / audio off after hours without the remote);
+  a reopen of the output after boot is in place for the other suspect. Check the TV when the loop is silent.
+- **Weather for a city other than home** still waits for the Yandex generative search (≈ 2–4 s total);
+  plain web search is faster but its snippets carry no numbers. Faster only with a weather provider
+  (Owner's decision).
+- **The agent sometimes writes a tool call as text** (`{"get_weather": …}` instead of a real call):
+  5 of 6 in one run on 2026-09-26 while the agent's instructions forced a greeting at the start of every
+  reply; after the Owner replaced that line, 16 of 16 real calls (laptop and Pi). Narrowed to the old
+  instruction; watched by the `tool_call_as_text` counter.
 
 ### Legacy Aura 0.1
 
