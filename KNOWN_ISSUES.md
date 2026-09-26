@@ -35,7 +35,10 @@
 - Resolved: stand Pi drop-outs (Wi-Fi power save, off since 2026-09-25); voice "not working" on the first
   live test (interface feedback, fixed by push-to-talk); Legacy returning on panel exit (removed); leaving
   the panel stopped Aura (fixed 2026-09-25); a re-plugged microphone left Aura deaf (fixed 2026-09-25);
-  weather ≈ 4–5 s (≈ 1–1.6 s since 2026-09-25).
+  weather ≈ 4–5 s (≈ 1–1.6 s since 2026-09-25); HDMI output missing at boot left every reply stuck in
+  "speaking" (fixed 2026-09-26: the output is waited for and a dead output is detected).
+- **The agent sometimes writes a tool call as text** (`{"get_weather": …}` spoken/printed instead of a real
+  call): 5 of 6 in one laptop test run on 2026-09-26, 0 of 8 on the Pi. Not understood yet; watch it.
 
 ### Legacy Aura 0.1
 

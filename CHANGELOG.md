@@ -16,6 +16,8 @@ to that release and a new Unreleased section is started above it.
   loopback). Merged into `main`, tag `aura-v1.0`; rollback commands in `aura-v1/docs/PI_MIGRATION.md`.
 - Microphone sensitivity investigated: the stand's USB adapter with its microphone applies its own voice
   processing, ordinary speech from 1–1.5 m is 20–25 dB short (hardware); kept by Owner decision.
+- Fixed after a reboot of the stand (2026-09-26): the HDMI output appearing after the service start
+  left Aura unable to answer; the output is now waited for like the microphone.
 - `AURA_V1_RULES.md` §9: new Owner decisions (panel exit, microphone, laptop VPN, `aura-v1.0`).
 - `CURRENT_STATE`, `NEXT_WORK`, `KNOWN_ISSUES`, `HANDOFF_AURA_V1` rewritten to the current state;
   `aura-v1/docs/DIAGNOSTICS.md` (read-only state and journal, PowerShell 5.1 quoting workaround),
