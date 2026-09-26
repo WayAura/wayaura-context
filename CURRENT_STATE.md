@@ -21,7 +21,7 @@ The active development cycle is **Aura v1**, built on the Owner's saved Yandex A
 New Aura (the sections below) are the project's history and experience; the Owner/Search/Computer
 governance and red zones below are reference only for this cycle.
 
-What is true for Aura v1 right now (2026-09-25, version `aura-v1.0`):
+What is true for Aura v1 right now (2026-09-26, version `aura-v1.0` = `wayaura-core` `main` 7b199da, on the Pi):
 
 - **One Aura, no substitutes.** Only Aura v1 runs on the stand Pi, only with the Owner's agent on its
   model `speech-realtime-260528`. An unknown agent stops Aura v1 with a clear error; there is no
@@ -51,8 +51,8 @@ What is true for Aura v1 right now (2026-09-25, version `aura-v1.0`):
   gain and the VAD threshold do not help (`aura-v1/FINDINGS.md`). Owner's decision: keep it for now; the
   phone will be the main microphone in the car.
 - **Stand network:** Pi drop-outs were Wi-Fi power save on the Pi; switched off by the Owner.
-- Code: `wayaura-core` `aura-v1/`, in `main`, tag `aura-v1.0` (rollback commands in
-  `aura-v1/docs/PI_MIGRATION.md`). The Pi runs the tagged version. Facts and measurements:
+- Code: `wayaura-core` `aura-v1/`, in `main`, tag `aura-v1.0` on 7b199da (stage 2 alone: c463061;
+  rollback commands in `aura-v1/docs/PI_MIGRATION.md` 4.1, checked). The Pi runs the tagged version. Facts and measurements:
   `aura-v1/FINDINGS.md`. Checkpoints: `MIGRATION_CHECKPOINTS/AURA_V1_*`.
 - Owner's voice test (2026-09-25): push-to-talk, follow-up, time, weather, search, OBD2 stub and the
   permanent service work; found: ordinary voice not heard (hardware, above), slow weather (fixed),
@@ -69,8 +69,7 @@ for a follow-up. The Pi's own wake word is a fallback for cabin microphones. Mai
 switch the hotspot on by themselves (Android/iOS) — options in PHONE_LINK §8, decision pending. SSH and
 the laptop are a development channel only.
 
-Stage 3 (2026-09-26, branch `feature/aura-v1-stage3`, not in `main` yet): voice from a client over the
-control channel (the laptop panel imitates the phone: `m` — laptop microphone, `s` — talk; reply
+Stage 3 (2026-09-26, in `main` and in `aura-v1.0`): voice from a client over the control channel (the laptop panel imitates the phone: `m` — laptop microphone, `s` — talk; reply
 ≈ 1.3 s after the end of the phrase, same as the Pi microphone), `listen` from the phone's wake word,
 HDMI output reopened once after boot, rollback-to-tag instructions checked and corrected.
 
