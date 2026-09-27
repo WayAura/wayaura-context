@@ -1,5 +1,8 @@
 # CURRENT_STATE
 
+> **2026-09-27: эпоха Aura v1 на Raspberry Pi закрыта** (итог — [`AURA_V1_PI_ERA.md`](AURA_V1_PI_ERA.md)).
+> Действующее состояние проекта — в репозитории `WayAura/wayaura-private`. Ниже — история.
+
 ## Phase
 
 WayAura is in the **operational base phase**.

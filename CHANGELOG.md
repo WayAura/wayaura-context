@@ -8,6 +8,15 @@ to that release and a new Unreleased section is started above it.
 ## Unreleased
 
 
+### Closed (Aura v1 on Raspberry Pi — 2026-09-27)
+
+- The Pi era is closed by the Owner's decision (product: phone + OBD adapter + cloud server). Summary,
+  lessons and how to return: `AURA_V1_PI_ERA.md`. `wayaura-core` tag `aura-v1-pi-final` (main 8421538);
+  `aura-v1.service` stopped and disabled on the Pi, files untouched. `START_HERE` points to the new
+  repositories `wayaura-private` and `wayaura-public`.
+- Brought in the stage-3 closing commit that missed PR #2 (aura-v1.0 in the docs, checkpoint 005).
+
+
 ### Added (Aura v1 — stage 3: phone voice, phone link design — 2026-09-26)
 
 - Owner decisions (§9): target architecture (Aura as the hub, phone mandatory, internet from the phone's

@@ -1,5 +1,8 @@
 # NEXT_WORK
 
+> **2026-09-27: эта ветка работ закрыта** вместе с эпохой Pi. Ближайшие шаги — в `WayAura/wayaura-private`
+> (`docs/ROADMAP.md`, этап G0).
+
 This file is the short operational bridge between
 [`CURRENT_STATE.md`](CURRENT_STATE.md) and the next agent's first
 practical move. It is not a roadmap. It is replaced as the front of
